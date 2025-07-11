@@ -1,8 +1,10 @@
 // SettingsDimensions Component
-const SettingsDimensions = ({ themeData, updateThemeJson }) => {
+lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.SettingsDimensions', ({ themeData, updateThemeJson }) => {
     const { __ } = wp.i18n;
     const { useState } = wp.element;
     const { TextControl } = wp.components;
+    const { TriStateCheckboxControl, ListManager } = ThemDesi.Components;
+    const { generateSlug, getSvgIcon, getWordPressDefault } = ThemDesi.Utils;
 
     const [aspectRatios, setAspectRatios] = useState(themeData.theme_json.settings?.dimensions?.aspectRatios || []);
 
@@ -18,7 +20,7 @@ const SettingsDimensions = ({ themeData, updateThemeJson }) => {
             
             // Auto-generate slug from name
             if (field === 'name') {
-                updatedAspectRatio.slug = ThemeDesignerUtils.generateSlug(value);
+                updatedAspectRatio.slug = generateSlug(value);
             }
             
             onUpdate(updatedAspectRatio);
@@ -49,7 +51,7 @@ const SettingsDimensions = ({ themeData, updateThemeJson }) => {
 
     return wp.element.createElement('div', { className: 'theme-designer--settings-dimensions' },
         wp.element.createElement('h2', null,
-            ThemeDesignerUtils.getSvgIcon('aspect_ratio'),
+            getSvgIcon('aspect_ratio'),
             __('Dimensions', 'theme-designer')
         ),
         
@@ -61,7 +63,7 @@ const SettingsDimensions = ({ themeData, updateThemeJson }) => {
                     label: __('Provide WordPress default aspect ratios', 'theme-designer'),
                     value: themeData.theme_json.settings?.dimensions?.defaultAspectRatios,
                     onChange: (value) => updateThemeJson('settings.dimensions.defaultAspectRatios', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.dimensions.defaultAspectRatios')
+                    defaultValue: getWordPressDefault('settings.dimensions.defaultAspectRatios')
                 })
             )
         ),
@@ -74,13 +76,13 @@ const SettingsDimensions = ({ themeData, updateThemeJson }) => {
                     label: __('Allow users to set custom aspect ratios', 'theme-designer'),
                     value: themeData.theme_json.settings?.dimensions?.aspectRatio,
                     onChange: (value) => updateThemeJson('settings.dimensions.aspectRatio', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.dimensions.aspectRatio')
+                    defaultValue: getWordPressDefault('settings.dimensions.aspectRatio')
                 }),
                 wp.element.createElement(TriStateCheckboxControl, {
                     label: __('Allow users to set custom minimum height', 'theme-designer'),
                     value: themeData.theme_json.settings?.dimensions?.minHeight,
                     onChange: (value) => updateThemeJson('settings.dimensions.minHeight', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.dimensions.minHeight')
+                    defaultValue: getWordPressDefault('settings.dimensions.minHeight')
                 })
             )
         ),
@@ -103,4 +105,4 @@ const SettingsDimensions = ({ themeData, updateThemeJson }) => {
             )
         )
     );
-}; 
+}); 

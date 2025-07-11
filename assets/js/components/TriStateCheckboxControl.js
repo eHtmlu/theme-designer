@@ -1,8 +1,9 @@
 // TriStateCheckboxControl Component - Three-state checkbox with WordPress default detection
-const TriStateCheckboxControl = ({ label, value, onChange, help, className, defaultValue }) => {
+lodash.set(window, 'ThemDesi.Components.TriStateCheckboxControl', ({ label, value, onChange, help, className, defaultValue }) => {
     const { __ } = wp.i18n;
     const { useState, useEffect, useRef } = wp.element;
     const { BaseControl } = wp.components;
+    const { getSvgIcon } = ThemDesi.Utils;
 
     const checkboxRef = useRef(null);
     const [state, setState] = useState('undefined'); // 'true', 'false', 'undefined'
@@ -121,7 +122,7 @@ const TriStateCheckboxControl = ({ label, value, onChange, help, className, defa
                 className: 'theme-designer--tri-state-checkbox__input',
                 onChange: handleChange,
             }),
-            ThemeDesignerUtils.getSvgIcon(
+            getSvgIcon(
                 currentState.icon,
                 {
                     size: 24,
@@ -135,4 +136,4 @@ const TriStateCheckboxControl = ({ label, value, onChange, help, className, defa
             )
         )
     );
-};
+});

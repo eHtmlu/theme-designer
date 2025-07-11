@@ -1,10 +1,12 @@
 // SettingsPosition Component
-const SettingsPosition = ({ themeData, updateThemeJson }) => {
+lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.SettingsPosition', ({ themeData, updateThemeJson }) => {
     const { __ } = wp.i18n;
+    const { TriStateCheckboxControl } = ThemDesi.Components;
+    const { generateSlug, getSvgIcon, getWordPressDefault } = ThemDesi.Utils;
 
     return wp.element.createElement('div', { className: 'theme-designer--settings-position' },
         wp.element.createElement('h2', null,
-            ThemeDesignerUtils.getSvgIcon('pin'),
+            getSvgIcon('pin'),
             __('Position', 'theme-designer')
         ),
         
@@ -15,9 +17,9 @@ const SettingsPosition = ({ themeData, updateThemeJson }) => {
                     label: __('Allow users to set sticky position', 'theme-designer'),
                     value: themeData.theme_json.settings?.position?.sticky,
                     onChange: (value) => updateThemeJson('settings.position.sticky', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.position.sticky'),
+                    defaultValue: getWordPressDefault('settings.position.sticky'),
                 }),
             )
         )
     );
-}; 
+}); 

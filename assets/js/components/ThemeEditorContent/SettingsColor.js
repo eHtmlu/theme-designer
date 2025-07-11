@@ -1,8 +1,10 @@
 // SettingsColor Component
-const SettingsColor = ({ themeData, updateThemeJson }) => {
+lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.SettingsColor', ({ themeData, updateThemeJson }) => {
     const { __ } = wp.i18n;
     const { useState } = wp.element;
     const { ColorPicker, Popover, TextControl } = wp.components;
+    const { TriStateCheckboxControl, ListManager } = ThemDesi.Components;
+    const { generateSlug, getSvgIcon, getWordPressDefault } = ThemDesi.Utils;
 
     const [colors, setColors] = useState(themeData.theme_json.settings?.color?.palette || []);
     const [gradients, setGradients] = useState(themeData.theme_json.settings?.color?.gradients || []);
@@ -25,7 +27,7 @@ const SettingsColor = ({ themeData, updateThemeJson }) => {
             
             // Auto-generate slug from name
             if (field === 'name') {
-                updatedColor.slug = ThemeDesignerUtils.generateSlug(value);
+                updatedColor.slug = generateSlug(value);
             }
             
             onUpdate(updatedColor);
@@ -79,7 +81,7 @@ const SettingsColor = ({ themeData, updateThemeJson }) => {
             
             // Auto-generate slug from name
             if (field === 'name') {
-                updatedGradient.slug = ThemeDesignerUtils.generateSlug(value);
+                updatedGradient.slug = generateSlug(value);
             }
             
             onUpdate(updatedGradient);
@@ -113,7 +115,7 @@ const SettingsColor = ({ themeData, updateThemeJson }) => {
 
     return wp.element.createElement('div', { className: 'theme-designer--settings-color' },
         wp.element.createElement('h2', null,
-            ThemeDesignerUtils.getSvgIcon('palette'),
+            getSvgIcon('palette'),
             __('Colors', 'theme-designer')
         ),
         
@@ -124,19 +126,19 @@ const SettingsColor = ({ themeData, updateThemeJson }) => {
                     label: __('Provide WordPress default color palette', 'theme-designer'),
                     value: themeData.theme_json.settings?.color?.defaultPalette,
                     onChange: (value) => updateThemeJson('settings.color.defaultPalette', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.color.defaultPalette'),
+                    defaultValue: getWordPressDefault('settings.color.defaultPalette'),
                 }),
                 wp.element.createElement(TriStateCheckboxControl, {
                     label: __('Provide WordPress default gradients', 'theme-designer'),
                     value: themeData.theme_json.settings?.color?.defaultGradients,
                     onChange: (value) => updateThemeJson('settings.color.defaultGradients', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.color.defaultGradients'),
+                    defaultValue: getWordPressDefault('settings.color.defaultGradients'),
                 }),
                 wp.element.createElement(TriStateCheckboxControl, {
                     label: __('Provide WordPress default duotone filters', 'theme-designer'),
                     value: themeData.theme_json.settings?.color?.defaultDuotone,
                     onChange: (value) => updateThemeJson('settings.color.defaultDuotone', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.color.defaultDuotone'),
+                    defaultValue: getWordPressDefault('settings.color.defaultDuotone'),
                 })
             )
         ),
@@ -148,55 +150,55 @@ const SettingsColor = ({ themeData, updateThemeJson }) => {
                     label: __('Allow users to set background colors', 'theme-designer'),
                     value: themeData.theme_json.settings?.color?.background,
                     onChange: (value) => updateThemeJson('settings.color.background', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.color.background'),
+                    defaultValue: getWordPressDefault('settings.color.background'),
                 }),
                 wp.element.createElement(TriStateCheckboxControl, {
                     label: __('Allow users to set text colors', 'theme-designer'),
                     value: themeData.theme_json.settings?.color?.text,
                     onChange: (value) => updateThemeJson('settings.color.text', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.color.text'),
+                    defaultValue: getWordPressDefault('settings.color.text'),
                 }),
                 wp.element.createElement(TriStateCheckboxControl, {
                     label: __('Allow users to set heading colors', 'theme-designer'),
                     value: themeData.theme_json.settings?.color?.heading,
                     onChange: (value) => updateThemeJson('settings.color.heading', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.color.heading'),
+                    defaultValue: getWordPressDefault('settings.color.heading'),
                 }),
                 wp.element.createElement(TriStateCheckboxControl, {
                     label: __('Allow users to set button colors', 'theme-designer'),
                     value: themeData.theme_json.settings?.color?.button,
                     onChange: (value) => updateThemeJson('settings.color.button', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.color.button'),
+                    defaultValue: getWordPressDefault('settings.color.button'),
                 }),
                 wp.element.createElement(TriStateCheckboxControl, {
                     label: __('Allow users to set caption colors', 'theme-designer'),
                     value: themeData.theme_json.settings?.color?.caption,
                     onChange: (value) => updateThemeJson('settings.color.caption', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.color.caption'),
+                    defaultValue: getWordPressDefault('settings.color.caption'),
                 }),
                 wp.element.createElement(TriStateCheckboxControl, {
                     label: __('Allow users to set link colors', 'theme-designer'),
                     value: themeData.theme_json.settings?.color?.link,
                     onChange: (value) => updateThemeJson('settings.color.link', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.color.link'),
+                    defaultValue: getWordPressDefault('settings.color.link'),
                 }),
                 wp.element.createElement(TriStateCheckboxControl, {
                     label: __('Allow users to set custom colors', 'theme-designer'),
                     value: themeData.theme_json.settings?.color?.custom,
                     onChange: (value) => updateThemeJson('settings.color.custom', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.color.custom'),
+                    defaultValue: getWordPressDefault('settings.color.custom'),
                 }),
                 wp.element.createElement(TriStateCheckboxControl, {
                     label: __('Allow users to set custom duotone filters', 'theme-designer'),
                     value: themeData.theme_json.settings?.color?.customDuotone,
                     onChange: (value) => updateThemeJson('settings.color.customDuotone', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.color.customDuotone'),
+                    defaultValue: getWordPressDefault('settings.color.customDuotone'),
                 }),
                 wp.element.createElement(TriStateCheckboxControl, {
                     label: __('Allow users to set custom gradients', 'theme-designer'),
                     value: themeData.theme_json.settings?.color?.customGradient,
                     onChange: (value) => updateThemeJson('settings.color.customGradient', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.color.customGradient'),
+                    defaultValue: getWordPressDefault('settings.color.customGradient'),
                 }),
             )
         ),
@@ -237,4 +239,4 @@ const SettingsColor = ({ themeData, updateThemeJson }) => {
             )
         )
     );
-}; 
+}); 

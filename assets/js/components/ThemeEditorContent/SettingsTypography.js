@@ -1,8 +1,10 @@
 // SettingsTypography Component
-const SettingsTypography = ({ themeData, updateThemeJson }) => {
+lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.SettingsTypography', ({ themeData, updateThemeJson }) => {
     const { __ } = wp.i18n;
     const { useState } = wp.element;
     const { TextControl, ToggleControl, BaseControl } = wp.components;
+    const { TriStateCheckboxControl, ListManager } = ThemDesi.Components;
+    const { generateSlug, getSvgIcon, getWordPressDefault } = ThemDesi.Utils;
 
     const [fontSizes, setFontSizes] = useState(themeData.theme_json.settings?.typography?.fontSizes || []);
     const [fontFamilies, setFontFamilies] = useState(themeData.theme_json.settings?.typography?.fontFamilies || []);
@@ -56,7 +58,7 @@ const SettingsTypography = ({ themeData, updateThemeJson }) => {
         
         // Auto-generate slug from name
         if (field === 'name') {
-            newFontSizes[index].slug = ThemeDesignerUtils.generateSlug(value);
+            newFontSizes[index].slug = generateSlug(value);
         }
         
         updateFontSizes(newFontSizes);
@@ -68,7 +70,7 @@ const SettingsTypography = ({ themeData, updateThemeJson }) => {
         
         // Auto-generate slug from name
         if (field === 'name') {
-            newFontFamilies[index].slug = ThemeDesignerUtils.generateSlug(value);
+            newFontFamilies[index].slug = generateSlug(value);
         }
         
         updateFontFamilies(newFontFamilies);
@@ -81,7 +83,7 @@ const SettingsTypography = ({ themeData, updateThemeJson }) => {
             
             // Auto-generate slug from name
             if (field === 'name') {
-                updatedFontSize.slug = ThemeDesignerUtils.generateSlug(value);
+                updatedFontSize.slug = generateSlug(value);
             }
             
             onUpdate(updatedFontSize);
@@ -182,7 +184,7 @@ const SettingsTypography = ({ themeData, updateThemeJson }) => {
             
             // Auto-generate slug from name
             if (field === 'name') {
-                updatedFontFamily.slug = ThemeDesignerUtils.generateSlug(value);
+                updatedFontFamily.slug = generateSlug(value);
             }
             
             onUpdate(updatedFontFamily);
@@ -216,7 +218,7 @@ const SettingsTypography = ({ themeData, updateThemeJson }) => {
 
     return wp.element.createElement('div', { className: 'theme-designer--settings-typography' },
         wp.element.createElement('h2', null,
-            ThemeDesignerUtils.getSvgIcon('format_text'),
+            getSvgIcon('format_text'),
             __('Typography', 'theme-designer')
         ),
         
@@ -228,7 +230,7 @@ const SettingsTypography = ({ themeData, updateThemeJson }) => {
                     label: __('Provide WordPress default font sizes', 'theme-designer'),
                     value: themeData.theme_json.settings?.typography?.defaultFontSizes,
                     onChange: (value) => updateThemeJson('settings.typography.defaultFontSizes', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.typography.defaultFontSizes')
+                    defaultValue: getWordPressDefault('settings.typography.defaultFontSizes')
                 }),
             )
         ),
@@ -241,69 +243,69 @@ const SettingsTypography = ({ themeData, updateThemeJson }) => {
                     label: __('Allow users to set custom font sizes (other than predefined)', 'theme-designer'),
                     value: themeData.theme_json.settings?.typography?.customFontSize,
                     onChange: (value) => updateThemeJson('settings.typography.customFontSize', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.typography.customFontSize')
+                    defaultValue: getWordPressDefault('settings.typography.customFontSize')
                 }),
                 wp.element.createElement(TriStateCheckboxControl, {
                     label: __('Allow users to set font styles', 'theme-designer'),
                     value: themeData.theme_json.settings?.typography?.fontStyle,
                     onChange: (value) => updateThemeJson('settings.typography.fontStyle', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.typography.fontStyle')
+                    defaultValue: getWordPressDefault('settings.typography.fontStyle')
                 }),
                 wp.element.createElement(TriStateCheckboxControl, {
                     label: __('Allow users to set font weights', 'theme-designer'),
                     value: themeData.theme_json.settings?.typography?.fontWeight,
                     onChange: (value) => updateThemeJson('settings.typography.fontWeight', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.typography.fontWeight')
+                    defaultValue: getWordPressDefault('settings.typography.fontWeight')
                 }),
                 wp.element.createElement(TriStateCheckboxControl, {
                     label: __('Allow users to set letter spacing', 'theme-designer'),
                     value: themeData.theme_json.settings?.typography?.letterSpacing,
                     onChange: (value) => updateThemeJson('settings.typography.letterSpacing', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.typography.letterSpacing')
+                    defaultValue: getWordPressDefault('settings.typography.letterSpacing')
                 }),
                 wp.element.createElement(TriStateCheckboxControl, {
                     label: __('Allow users to set line height', 'theme-designer'),
                     value: themeData.theme_json.settings?.typography?.lineHeight,
                     onChange: (value) => updateThemeJson('settings.typography.lineHeight', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.typography.lineHeight')
+                    defaultValue: getWordPressDefault('settings.typography.lineHeight')
                 }),
                 wp.element.createElement(TriStateCheckboxControl, {
                     label: __('Allow users to set text alignment', 'theme-designer'),
                     value: themeData.theme_json.settings?.typography?.textAlign,
                     onChange: (value) => updateThemeJson('settings.typography.textAlign', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.typography.textAlign'),
+                    defaultValue: getWordPressDefault('settings.typography.textAlign'),
                     help: __('No core block takes this setting into account yet, so this setting may have no effect.', 'theme-designer')
                 }),
                 wp.element.createElement(TriStateCheckboxControl, {
                     label: __('Allow users to set text columns', 'theme-designer'),
                     value: themeData.theme_json.settings?.typography?.textColumns,
                     onChange: (value) => updateThemeJson('settings.typography.textColumns', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.typography.textColumns'),
+                    defaultValue: getWordPressDefault('settings.typography.textColumns'),
                     help: __('No core block supports this feature yet, so this setting may have no effect.', 'theme-designer')
                 }),
                 wp.element.createElement(TriStateCheckboxControl, {
                     label: __('Allow users to set text decorations', 'theme-designer'),
                     value: themeData.theme_json.settings?.typography?.textDecoration,
                     onChange: (value) => updateThemeJson('settings.typography.textDecoration', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.typography.textDecoration')
+                    defaultValue: getWordPressDefault('settings.typography.textDecoration')
                 }),
                 wp.element.createElement(TriStateCheckboxControl, {
                     label: __('Allow users to set writing mode (text direction)', 'theme-designer'),
                     value: themeData.theme_json.settings?.typography?.writingMode,
                     onChange: (value) => updateThemeJson('settings.typography.writingMode', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.typography.writingMode')
+                    defaultValue: getWordPressDefault('settings.typography.writingMode')
                 }),
                 wp.element.createElement(TriStateCheckboxControl, {
                     label: __('Allow users to set text transforms', 'theme-designer'),
                     value: themeData.theme_json.settings?.typography?.textTransform,
                     onChange: (value) => updateThemeJson('settings.typography.textTransform', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.typography.textTransform')
+                    defaultValue: getWordPressDefault('settings.typography.textTransform')
                 }),
                 wp.element.createElement(TriStateCheckboxControl, {
                     label: __('Allow users to enable drop caps', 'theme-designer'),
                     value: themeData.theme_json.settings?.typography?.dropCap,
                     onChange: (value) => updateThemeJson('settings.typography.dropCap', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.typography.dropCap')
+                    defaultValue: getWordPressDefault('settings.typography.dropCap')
                 }),
             )
         ),
@@ -390,4 +392,4 @@ const SettingsTypography = ({ themeData, updateThemeJson }) => {
             )
         )
     );
-}; 
+}); 

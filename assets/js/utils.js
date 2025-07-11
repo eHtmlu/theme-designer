@@ -1,5 +1,5 @@
 // Utility functions for Theme Designer
-const ThemeDesignerUtils = {
+lodash.set(window, 'ThemDesi.Utils', {
     // Generate slug from text
     generateSlug: (text) => {
         return text
@@ -98,12 +98,12 @@ const ThemeDesignerUtils = {
 
     // Get WordPress default value for a specific setting
     getWordPressDefault: (settingPath) => {
-        if (!themeDesignerData.wpDefaults) {
+        if (!ThemDesiData.wpDefaults) {
             return undefined;
         }
         
         const keys = settingPath.split('.');
-        let current = themeDesignerData.wpDefaults;
+        let current = ThemDesiData.wpDefaults;
         
         for (const key of keys) {
             if (current && typeof current === 'object' && key in current) {
@@ -115,4 +115,4 @@ const ThemeDesignerUtils = {
         
         return current;
     }
-}; 
+}); 

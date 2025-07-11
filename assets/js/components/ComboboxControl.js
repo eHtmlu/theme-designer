@@ -1,5 +1,5 @@
 // ComboboxControl Component - Combines SelectControl with TextControl for custom values
-const ComboboxControl = ({ label, value, onChange, options, placeholder, help, className, ...props }) => {
+lodash.set(window, 'ThemDesi.Components.ComboboxControl', ({ label, value, onChange, options, placeholder, help, className, ...props }) => {
     const { __ } = wp.i18n;
     const { useState, useRef, useEffect } = wp.element;
     const { SelectControl, TextControl, BaseControl } = wp.components;
@@ -75,4 +75,4 @@ const ComboboxControl = ({ label, value, onChange, options, placeholder, help, c
                 ...props
             })
     );
-}; 
+}); 

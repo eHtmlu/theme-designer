@@ -1,8 +1,9 @@
 // ThemeMetaData Component
-const ThemeMetaData = ({ themeData, updateThemeData, slugStatus, isNew = false }) => {
+lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.ThemeMetaData', ({ themeData, updateThemeData, slugStatus, isNew = false }) => {
     const { __ } = wp.i18n;
     const { useState, useEffect, useRef } = wp.element;
     const { BaseControl, TextControl, TextareaControl, Button } = wp.components;
+    const { generateSlug, getSvgIcon, showAlert } = ThemDesi.Utils;
 
     const [localData, setLocalData] = useState(themeData);
     const [screenshotPreview, setScreenshotPreview] = useState(themeData.screenshot || '');
@@ -25,7 +26,7 @@ const ThemeMetaData = ({ themeData, updateThemeData, slugStatus, isNew = false }
         
         // Auto-generate slug and text domain only for new themes or if they are completely empty
         if (isNew || (!localData.slug || localData.slug === '') && (!localData.text_domain || localData.text_domain === '')) {
-            const slug = ThemeDesignerUtils.generateSlug(value);
+            const slug = generateSlug(value);
             updates.slug = slug;
             updates.text_domain = slug;
         }
@@ -37,7 +38,7 @@ const ThemeMetaData = ({ themeData, updateThemeData, slugStatus, isNew = false }
     };
 
     const handleSlugChange = (value) => {
-        const slug = ThemeDesignerUtils.generateSlug(value);
+        const slug = generateSlug(value);
         const updates = { slug: slug };
         
         // Only auto-update text domain for new themes or if text domain is empty
@@ -51,7 +52,7 @@ const ThemeMetaData = ({ themeData, updateThemeData, slugStatus, isNew = false }
     };
 
     const handleTextDomainChange = (value) => {
-        const textDomain = ThemeDesignerUtils.generateSlug(value);
+        const textDomain = generateSlug(value);
         handleChange('text_domain', textDomain);
     };
 
@@ -65,13 +66,13 @@ const ThemeMetaData = ({ themeData, updateThemeData, slugStatus, isNew = false }
 
         // Validate file type
         if (!file.type.match('image.*')) {
-            ThemeDesignerUtils.showAlert(__('Please select an image file.', 'theme-designer'), 'error');
+            showAlert(__('Please select an image file.', 'theme-designer'), 'error');
             return;
         }
 
         // Validate file size (2MB)
         if (file.size > 2 * 1024 * 1024) {
-            ThemeDesignerUtils.showAlert(__('File size must be less than 2MB.', 'theme-designer'), 'error');
+            showAlert(__('File size must be less than 2MB.', 'theme-designer'), 'error');
             return;
         }
 
@@ -95,7 +96,7 @@ const ThemeMetaData = ({ themeData, updateThemeData, slugStatus, isNew = false }
 
     return wp.element.createElement('div', { className: 'theme-designer--meta-data' },
         wp.element.createElement('h2', null,
-            ThemeDesignerUtils.getSvgIcon('store'),
+            getSvgIcon('store'),
             __('Theme Meta Data', 'theme-designer')
         ),
         
@@ -168,7 +169,7 @@ const ThemeMetaData = ({ themeData, updateThemeData, slugStatus, isNew = false }
                                 className: 'theme-designer--screenshot-image'
                             })
                             : wp.element.createElement('div', { className: 'theme-designer--screenshot-placeholder' },
-                                ThemeDesignerUtils.getSvgIcon('image'),
+                                getSvgIcon('image'),
                                 wp.element.createElement('p', null, __('No screenshot uploaded', 'theme-designer'))
                             )
                     ),
@@ -314,4 +315,4 @@ const ThemeMetaData = ({ themeData, updateThemeData, slugStatus, isNew = false }
             )
         ),
     );
-}; 
+}); 

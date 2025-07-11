@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const { __ } = wp.i18n;
     const { useState, useEffect, render } = wp.element;
     const { Button } = wp.components;
+    const { ThemeList, ThemeEditor, SuccessMessage } = window.ThemDesi.Components;
+    const { showAlert, getDefaultConfig, deepClone } = ThemDesi.Utils;
+    const { getThemes, getTheme, saveTheme, deleteTheme } = ThemDesi.API;
 
     // Main App Component
     const ThemeDesignerApp = () => {
@@ -27,11 +30,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (!silent) {
                     setIsLoading(true);
                 }
-                const themesData = await ThemeDesignerAPI.getThemes();
+                const themesData = await getThemes();
                 setThemes(themesData);
             } catch (error) {
                 if (!silent) {
-                    ThemeDesignerUtils.showAlert(error.message, 'error');
+                    showAlert(error.message, 'error');
                 }
             } finally {
                 if (!silent) {
@@ -46,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         const handleCreateNew = () => {
-            setCurrentTheme(ThemeDesignerUtils.getDefaultConfig());
+            setCurrentTheme(getDefaultConfig());
             setIsNew(true);
             setView('editor');
         };
@@ -54,12 +57,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const handleEdit = async (slug) => {
             try {
                 setIsLoading(true);
-                const themeData = await ThemeDesignerAPI.getTheme(slug);
+                const themeData = await getTheme(slug);
                 setCurrentTheme(themeData);
                 setIsNew(false);
                 setView('editor');
             } catch (error) {
-                ThemeDesignerUtils.showAlert(error.message, 'error');
+                showAlert(error.message, 'error');
             } finally {
                 setIsLoading(false);
             }
@@ -68,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const handleDuplicate = async (slug) => {
             try {
                 setIsLoading(true);
-                const themeData = await ThemeDesignerAPI.getTheme(slug);
+                const themeData = await getTheme(slug);
                 
                 // Create duplicate data
                 const duplicateData = {
@@ -83,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 setIsNew(true);
                 setView('editor');
             } catch (error) {
-                ThemeDesignerUtils.showAlert(error.message, 'error');
+                showAlert(error.message, 'error');
             } finally {
                 setIsLoading(false);
             }
@@ -91,11 +94,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const handleDelete = async (theme) => {
             try {
-                await ThemeDesignerAPI.deleteTheme(theme.slug);
+                await deleteTheme(theme.slug);
                 showSuccessMessage(__('Theme deleted successfully.', 'theme-designer'));
                 loadThemes(true);
             } catch (error) {
-                ThemeDesignerUtils.showAlert(error.message, 'error');
+                showAlert(error.message, 'error');
             }
         };
 
@@ -105,12 +108,12 @@ document.addEventListener('DOMContentLoaded', function() {
             setIsSaving(true);
             
             try {
-                const result = await ThemeDesignerAPI.saveTheme(currentTheme);
+                const result = await saveTheme(currentTheme);
                 
                 // Reload the theme data from server to get the latest version
                 if (result.new_slug) {
                     try {
-                        const updatedThemeData = await ThemeDesignerAPI.getTheme(result.new_slug);
+                        const updatedThemeData = await getTheme(result.new_slug);
                         setCurrentTheme(updatedThemeData);
                     } catch (error) {
                         // If we can't reload, just update the slug
@@ -123,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 loadThemes(true);
                 
             } catch (error) {
-                ThemeDesignerUtils.showAlert(error.message, 'error');
+                showAlert(error.message, 'error');
             } finally {
                 setIsSaving(false);
             }
@@ -141,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const updateThemeJson = (path, value) => {
             setCurrentTheme(prev => {
-                const newData = ThemeDesignerUtils.deepClone(prev);
+                const newData = deepClone(prev);
                 const keys = path.split('.');
                 let current = newData.theme_json;
                 
@@ -258,7 +261,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     ' ',
                     __('The Theme Designer directly adds, changes and removes the theme files, so you\'re modifying the actual theme, not just its settings.', 'theme-designer')
                 ),
-                !themeDesignerData.exportSupported && wp.element.createElement('p', { className: 'theme-designer--footer__text' }, 
+                !ThemDesiData.exportSupported && wp.element.createElement('p', { className: 'theme-designer--footer__text' }, 
                     wp.element.createElement('strong', {}, __('Note:', 'theme-designer')),
                     ' ',
                     __('Exporting the theme as a ZIP file is not supported on this server because it requires the PHP ZipArchive module.', 'theme-designer')

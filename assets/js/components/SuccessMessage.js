@@ -1,5 +1,5 @@
 // SuccessMessage Component
-const SuccessMessage = ({ message, onClose }) => {
+lodash.set(window, 'ThemDesi.Components.SuccessMessage', ({ message, onClose }) => {
     const { __ } = wp.i18n;
     const { useEffect } = wp.element;
     const { Button } = wp.components;
@@ -26,4 +26,4 @@ const SuccessMessage = ({ message, onClose }) => {
             className: 'theme-designer--success-message__dismiss'
         }, __('Dismiss', 'theme-designer'))
     );
-}; 
+}); 

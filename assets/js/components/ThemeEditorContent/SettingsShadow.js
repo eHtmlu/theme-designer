@@ -1,8 +1,10 @@
 // SettingsShadow Component
-const SettingsShadow = ({ themeData, updateThemeJson }) => {
+lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.SettingsShadow', ({ themeData, updateThemeJson }) => {
     const { __ } = wp.i18n;
     const { useState } = wp.element;
     const { TextControl } = wp.components;
+    const { TriStateCheckboxControl, ListManager } = ThemDesi.Components;
+    const { generateSlug, getSvgIcon, getWordPressDefault } = ThemDesi.Utils;
 
     const [shadows, setShadows] = useState(themeData.theme_json.settings?.shadow?.presets || []);
 
@@ -18,7 +20,7 @@ const SettingsShadow = ({ themeData, updateThemeJson }) => {
             
             // Auto-generate slug from name
             if (field === 'name') {
-                updatedShadow.slug = ThemeDesignerUtils.generateSlug(value);
+                updatedShadow.slug = generateSlug(value);
             }
             
             onUpdate(updatedShadow);
@@ -52,7 +54,7 @@ const SettingsShadow = ({ themeData, updateThemeJson }) => {
 
     return wp.element.createElement('div', { className: 'theme-designer--settings-shadow' },
         wp.element.createElement('h2', null,
-            ThemeDesignerUtils.getSvgIcon('box_shadow'),
+            getSvgIcon('box_shadow'),
             __('Shadows', 'theme-designer')
         ),
         
@@ -64,7 +66,7 @@ const SettingsShadow = ({ themeData, updateThemeJson }) => {
                     label: __('Provide WordPress default shadow presets', 'theme-designer'),
                     value: themeData.theme_json.settings?.shadow?.defaultPresets,
                     onChange: (value) => updateThemeJson('settings.shadow.defaultPresets', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.shadow.defaultPresets')
+                    defaultValue: getWordPressDefault('settings.shadow.defaultPresets')
                 })
             )
         ),
@@ -87,4 +89,4 @@ const SettingsShadow = ({ themeData, updateThemeJson }) => {
             )
         )
     );
-}; 
+}); 

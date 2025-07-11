@@ -13,6 +13,8 @@
  * Text Domain: theme-designer
  */
 
+namespace ThemDesi;
+
 // Prevent direct access
 if (!defined('ABSPATH')) {
     exit;
@@ -20,10 +22,10 @@ if (!defined('ABSPATH')) {
 
 
 // Define plugin constants
-define('THEME_DESIGNER_VERSION', '1.0.0');
-define('THEME_DESIGNER_PLUGIN_URL', plugin_dir_url(__FILE__));
-define('THEME_DESIGNER_PLUGIN_PATH', plugin_dir_path(__FILE__));
-define('THEME_DESIGNER_PLUGIN_FILE', __FILE__);
+define(__NAMESPACE__ . '\PLUGIN_URL', plugin_dir_url(__FILE__));
+define(__NAMESPACE__ . '\PLUGIN_PATH', plugin_dir_path(__FILE__));
+
+
 
 class ThemeDesigner {
     
@@ -73,17 +75,17 @@ class ThemeDesigner {
             'components/ThemeList.js',
             'components/SuccessMessage.js',
             'components/ThemeEditor.js',
-            'components/ThemeEditor/ThemeMetaData.js',
-            'components/ThemeEditor/SettingsGeneral.js',
-            'components/ThemeEditor/SettingsColor.js',
-            'components/ThemeEditor/SettingsTypography.js',
-            'components/ThemeEditor/SettingsShadow.js',
-            'components/ThemeEditor/SettingsDimensions.js',
-            'components/ThemeEditor/SettingsLayout.js',
-            'components/ThemeEditor/SettingsBackground.js',
-            'components/ThemeEditor/SettingsBorder.js',
-            'components/ThemeEditor/SettingsPosition.js',
-            'components/ThemeEditor/SettingsSpacing.js',
+            'components/ThemeEditorContent/ThemeMetaData.js',
+            'components/ThemeEditorContent/SettingsGeneral.js',
+            'components/ThemeEditorContent/SettingsColor.js',
+            'components/ThemeEditorContent/SettingsTypography.js',
+            'components/ThemeEditorContent/SettingsShadow.js',
+            'components/ThemeEditorContent/SettingsDimensions.js',
+            'components/ThemeEditorContent/SettingsLayout.js',
+            'components/ThemeEditorContent/SettingsBackground.js',
+            'components/ThemeEditorContent/SettingsBorder.js',
+            'components/ThemeEditorContent/SettingsPosition.js',
+            'components/ThemeEditorContent/SettingsSpacing.js',
             'admin.js',
         ];
         
@@ -93,9 +95,9 @@ class ThemeDesigner {
             $handle = 'theme-designer-' . str_replace(['.js', '/'], ['', '-'], $file);
             wp_enqueue_script(
                 $handle,
-                THEME_DESIGNER_PLUGIN_URL . 'assets/js/' . $file,
-                $previous_handle ? [$previous_handle] : ['wp-element', 'wp-components', 'wp-i18n'],
-                filemtime(THEME_DESIGNER_PLUGIN_PATH . 'assets/js/' . $file),
+                PLUGIN_URL . 'assets/js/' . $file,
+                $previous_handle ? [$previous_handle] : ['wp-element', 'wp-components', 'wp-i18n', 'lodash'],
+                filemtime(PLUGIN_PATH . 'assets/js/' . $file),
                 true
             );
             $previous_handle = $handle;
@@ -104,12 +106,12 @@ class ThemeDesigner {
         // Enqueue styles
         wp_enqueue_style(
             'theme-designer-admin',
-            THEME_DESIGNER_PLUGIN_URL . 'assets/css/admin.css',
+            PLUGIN_URL . 'assets/css/admin.css',
             ['wp-components'],
-            filemtime(THEME_DESIGNER_PLUGIN_PATH . 'assets/css/admin.css')
+            filemtime(PLUGIN_PATH . 'assets/css/admin.css')
         );
         
-        wp_localize_script('theme-designer-admin', 'themeDesignerData', [
+        wp_localize_script('theme-designer-admin', 'ThemDesiData', [
             'restUrl' => rest_url('theme-designer/v1/'),
             'nonce' => wp_create_nonce('wp_rest'),
             'currentTheme' => get_stylesheet(),
@@ -198,7 +200,7 @@ class ThemeDesigner {
         $theme_data = $this->get_theme_data($slug);
         
         if (!$theme_data) {
-            return new WP_Error('theme_not_found', __('Theme not found.', 'theme-designer'), ['status' => 404]);
+            return new \WP_Error('theme_not_found', __('Theme not found.', 'theme-designer'), ['status' => 404]);
         }
         
         return rest_ensure_response($theme_data);
@@ -213,7 +215,7 @@ class ThemeDesigner {
         $theme_data = $request->get_json_params();
         
         if (!$theme_data) {
-            return new WP_Error('invalid_data', __('Invalid theme data.', 'theme-designer'), ['status' => 400]);
+            return new \WP_Error('invalid_data', __('Invalid theme data.', 'theme-designer'), ['status' => 400]);
         }
         
         // Sanitize theme data before processing
@@ -241,7 +243,7 @@ class ThemeDesigner {
         $slug = $this->sanitize_theme_slug($request['slug']);
         
         if ($slug === get_stylesheet()) {
-            return new WP_Error('active_theme', __('Cannot delete the active theme.', 'theme-designer'), ['status' => 400]);
+            return new \WP_Error('active_theme', __('Cannot delete the active theme.', 'theme-designer'), ['status' => 400]);
         }
         
         $theme_path = get_theme_root() . '/' . $slug; // already sanitized
@@ -254,7 +256,7 @@ class ThemeDesigner {
             ]);
         }
         
-        return new WP_Error('theme_not_found', __('Theme not found.', 'theme-designer'), ['status' => 404]);
+        return new \WP_Error('theme_not_found', __('Theme not found.', 'theme-designer'), ['status' => 404]);
     }
     
     /**
@@ -325,7 +327,7 @@ class ThemeDesigner {
      * @return array
      */
     private function get_wp_defaults() {
-        return WP_Theme_JSON_Resolver::get_core_data()->get_raw_data();
+        return \WP_Theme_JSON_Resolver::get_core_data()->get_raw_data();
     }
     
     /**
@@ -467,7 +469,7 @@ class ThemeDesigner {
         if (!$is_duplicate && !empty($original_slug) && $original_slug !== $slug) {
             // Prevent renaming active themes
             if ($original_slug === get_stylesheet()) {
-                return new WP_Error('active_theme_rename', __('Cannot rename the active theme.', 'theme-designer'));
+                return new \WP_Error('active_theme_rename', __('Cannot rename the active theme.', 'theme-designer'));
             }
 
             $original_path = get_theme_root() . '/' . $original_slug; // already sanitized in sanitize_theme_data
@@ -476,7 +478,7 @@ class ThemeDesigner {
             if ($this->wp_filesystem()->is_dir($original_path)) {
                 // Rename the directory
                 if (!$this->wp_filesystem()->move($original_path, $theme_path)) {
-                    return new WP_Error('directory_rename_failed', __('Failed to rename theme directory.', 'theme-designer'));
+                    return new \WP_Error('directory_rename_failed', __('Failed to rename theme directory.', 'theme-designer'));
                 }
             }
         }
@@ -484,7 +486,7 @@ class ThemeDesigner {
         // Create theme directory if it doesn't exist
         if (!$this->wp_filesystem()->is_dir($theme_path)) {
             if (!$this->wp_filesystem()->mkdir($theme_path, 0755)) {
-                return new WP_Error('directory_creation_failed', __('Failed to create theme directory.', 'theme-designer'));
+                return new \WP_Error('directory_creation_failed', __('Failed to create theme directory.', 'theme-designer'));
             }
         }
         
@@ -492,7 +494,7 @@ class ThemeDesigner {
         $templates_path = $theme_path . '/templates';
         if (!$this->wp_filesystem()->is_dir($templates_path)) {
             if (!$this->wp_filesystem()->mkdir($templates_path, 0755)) {
-                return new WP_Error('templates_creation_failed', __('Failed to create templates directory.', 'theme-designer'));
+                return new \WP_Error('templates_creation_failed', __('Failed to create templates directory.', 'theme-designer'));
             }
         }
         
@@ -500,38 +502,38 @@ class ThemeDesigner {
         $parts_path = $theme_path . '/parts';
         if (!$this->wp_filesystem()->is_dir($parts_path)) {
             if (!$this->wp_filesystem()->mkdir($parts_path, 0755)) {
-                return new WP_Error('parts_creation_failed', __('Failed to create parts directory.', 'theme-designer'));
+                return new \WP_Error('parts_creation_failed', __('Failed to create parts directory.', 'theme-designer'));
             }
         }
         
         // Save style.css
         $style_content = $this->generate_style_css($theme_data);
         if (!$this->wp_filesystem()->put_contents($theme_path . '/style.css', $style_content)) {
-            return new WP_Error('style_save_failed', __('Failed to save style.css.', 'theme-designer'));
+            return new \WP_Error('style_save_failed', __('Failed to save style.css.', 'theme-designer'));
         }
         
         // Save theme.json
         $theme_json = $theme_data['theme_json'];
         if (!$this->wp_filesystem()->put_contents($theme_path . '/theme.json', json_encode($theme_json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES))) {
-            return new WP_Error('theme_json_save_failed', __('Failed to save theme.json.', 'theme-designer'));
+            return new \WP_Error('theme_json_save_failed', __('Failed to save theme.json.', 'theme-designer'));
         }
         
         // Save index.html
         $index_content = $this->generate_index_html($theme_data);
         if (!$this->wp_filesystem()->put_contents($templates_path . '/index.html', $index_content)) {
-            return new WP_Error('index_save_failed', __('Failed to save index.html.', 'theme-designer'));
+            return new \WP_Error('index_save_failed', __('Failed to save index.html.', 'theme-designer'));
         }
         
         // Save header template part
         $header_content = $this->generate_header_part($theme_data);
         if (!$this->wp_filesystem()->put_contents($parts_path . '/header.html', $header_content)) {
-            return new WP_Error('header_save_failed', __('Failed to save header.html.', 'theme-designer'));
+            return new \WP_Error('header_save_failed', __('Failed to save header.html.', 'theme-designer'));
         }
         
         // Save footer template part
         $footer_content = $this->generate_footer_part($theme_data);
         if (!$this->wp_filesystem()->put_contents($parts_path . '/footer.html', $footer_content)) {
-            return new WP_Error('footer_save_failed', __('Failed to save footer.html.', 'theme-designer'));
+            return new \WP_Error('footer_save_failed', __('Failed to save footer.html.', 'theme-designer'));
         }
         
         // Save screenshot if provided
@@ -563,27 +565,27 @@ class ThemeDesigner {
     private function validate_theme_slug_syntax($slug) {
         // Check if slug is empty
         if (empty($slug)) {
-            return new WP_Error('empty_slug', __('Theme slug cannot be empty.', 'theme-designer'));
+            return new \WP_Error('empty_slug', __('Theme slug cannot be empty.', 'theme-designer'));
         }
         
         // Check if slug is too short
         if (strlen($slug) < 3) {
-            return new WP_Error('slug_too_short', __('Theme slug must be at least 3 characters long.', 'theme-designer'));
+            return new \WP_Error('slug_too_short', __('Theme slug must be at least 3 characters long.', 'theme-designer'));
         }
         
         // Check if slug is too long (max 50 characters for directory names)
         if (strlen($slug) > 50) {
-            return new WP_Error('slug_too_long', __('Theme slug cannot exceed 50 characters.', 'theme-designer'));
+            return new \WP_Error('slug_too_long', __('Theme slug cannot exceed 50 characters.', 'theme-designer'));
         }
         
         // Check if slug contains only valid characters (letters, numbers, hyphens, underscores)
         if (!preg_match('/^[a-z0-9-]+$/', $slug)) {
-            return new WP_Error('invalid_slug_chars', __('Theme slug can only contain lowercase letters, numbers, and hyphens.', 'theme-designer'));
+            return new \WP_Error('invalid_slug_chars', __('Theme slug can only contain lowercase letters, numbers, and hyphens.', 'theme-designer'));
         }
         
         // Check if slug starts or ends with hyphen or underscore
         if (preg_match('/^[-]|[-]$/', $slug)) {
-            return new WP_Error('invalid_slug_format', __('Theme slug cannot start or end with a hyphen.', 'theme-designer'));
+            return new \WP_Error('invalid_slug_format', __('Theme slug cannot start or end with a hyphen.', 'theme-designer'));
         }
         
         // Check for reserved names that could cause issues
@@ -595,7 +597,7 @@ class ThemeDesigner {
         ];
         
         if (in_array(strtolower($slug), $reserved_names)) {
-            return new WP_Error('reserved_slug', sprintf(
+            return new \WP_Error('reserved_slug', sprintf(
                 /* translators: 1: Theme slug */
                 __('Theme slug "%s" is reserved and cannot be used.', 'theme-designer'),
                 $slug
@@ -604,7 +606,7 @@ class ThemeDesigner {
         
         // Check if slug contains consecutive hyphens
         if (preg_match('/--/', $slug)) {
-            return new WP_Error('consecutive_chars', __('Theme slug cannot contain consecutive hyphens.', 'theme-designer'));
+            return new \WP_Error('consecutive_chars', __('Theme slug cannot contain consecutive hyphens.', 'theme-designer'));
         }
         
         return true;
@@ -757,19 +759,19 @@ class ThemeDesigner {
         
         $zip_path = wp_tempnam('theme-export-' . $theme_slug);
         $zip = new ZipArchive();
-        $zip_result = $zip->open($zip_path, ZipArchive::CREATE | ZipArchive::OVERWRITE);
+        $zip_result = $zip->open($zip_path, \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
         
         if ($zip_result !== true) {
             $error_messages = [
-                ZipArchive::ER_EXISTS => __('File already exists.', 'theme-designer'),
-                ZipArchive::ER_INCONS => __('ZIP archive inconsistent.', 'theme-designer'),
-                ZipArchive::ER_INVAL => __('Invalid argument.', 'theme-designer'),
-                ZipArchive::ER_MEMORY => __('Memory allocation failure.', 'theme-designer'),
-                ZipArchive::ER_NOENT => __('No such file.', 'theme-designer'),
-                ZipArchive::ER_NOZIP => __('Not a ZIP archive.', 'theme-designer'),
-                ZipArchive::ER_OPEN => __('Can\'t open file.', 'theme-designer'),
-                ZipArchive::ER_READ => __('Read error.', 'theme-designer'),
-                ZipArchive::ER_SEEK => __('Seek error.', 'theme-designer'),
+                \ZipArchive::ER_EXISTS => __('File already exists.', 'theme-designer'),
+                \ZipArchive::ER_INCONS => __('ZIP archive inconsistent.', 'theme-designer'),
+                \ZipArchive::ER_INVAL => __('Invalid argument.', 'theme-designer'),
+                \ZipArchive::ER_MEMORY => __('Memory allocation failure.', 'theme-designer'),
+                \ZipArchive::ER_NOENT => __('No such file.', 'theme-designer'),
+                \ZipArchive::ER_NOZIP => __('Not a ZIP archive.', 'theme-designer'),
+                \ZipArchive::ER_OPEN => __('Can\'t open file.', 'theme-designer'),
+                \ZipArchive::ER_READ => __('Read error.', 'theme-designer'),
+                \ZipArchive::ER_SEEK => __('Seek error.', 'theme-designer'),
             ];
             
             $error_message = isset($error_messages[$zip_result]) 
@@ -830,9 +832,9 @@ class ThemeDesigner {
             return;
         }
         
-        $files = new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator($dir),
-            RecursiveIteratorIterator::LEAVES_ONLY // only add files, not directories
+        $files = new \RecursiveIteratorIterator(
+            new \RecursiveDirectoryIterator($dir),
+            \RecursiveIteratorIterator::LEAVES_ONLY // only add files, not directories
         );
         
         foreach ($files as $file) {

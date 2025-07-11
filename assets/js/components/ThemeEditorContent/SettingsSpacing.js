@@ -1,8 +1,10 @@
 // SettingsSpacing Component
-const SettingsSpacing = ({ themeData, updateThemeJson }) => {
+lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.SettingsSpacing', ({ themeData, updateThemeJson }) => {
     const { __ } = wp.i18n;
     const { useState } = wp.element;
     const { TextControl, RangeControl, SelectControl, ToggleControl } = wp.components;
+    const { TriStateCheckboxControl, ListManager, ComboboxControl } = ThemDesi.Components;
+    const { generateSlug, getSvgIcon, getWordPressDefault } = ThemDesi.Utils;
 
     const spacing = themeData.theme_json.settings?.spacing || {};
     const [units, setUnits] = useState(spacing.units || []);
@@ -30,7 +32,7 @@ const SettingsSpacing = ({ themeData, updateThemeJson }) => {
         
         // Auto-generate slug from name
         if (field === 'name') {
-            newSpacingSizes[index].slug = ThemeDesignerUtils.generateSlug(value);
+            newSpacingSizes[index].slug = generateSlug(value);
         }
         
         updateSpacingSizes(newSpacingSizes);
@@ -103,7 +105,7 @@ const SettingsSpacing = ({ themeData, updateThemeJson }) => {
             
             // Auto-generate slug from name
             if (field === 'name') {
-                updatedSpacingSize.slug = ThemeDesignerUtils.generateSlug(value);
+                updatedSpacingSize.slug = generateSlug(value);
             }
             
             onUpdate(updatedSpacingSize);
@@ -137,7 +139,7 @@ const SettingsSpacing = ({ themeData, updateThemeJson }) => {
 
     return wp.element.createElement('div', { className: 'theme-designer--settings-spacing' },
         wp.element.createElement('h2', null,
-            ThemeDesignerUtils.getSvgIcon('arrow_all'),
+            getSvgIcon('arrow_all'),
             __('Spacing', 'theme-designer')
         ),
         
@@ -149,7 +151,7 @@ const SettingsSpacing = ({ themeData, updateThemeJson }) => {
                     label: __('Provide WordPress default spacing scale', 'theme-designer'),
                     value: spacing.defaultSpacingSizes,
                     onChange: (value) => updateThemeJson('settings.spacing.defaultSpacingSizes', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.spacing.defaultSpacingSizes')
+                    defaultValue: getWordPressDefault('settings.spacing.defaultSpacingSizes')
                 }),
             )
         ),
@@ -162,25 +164,25 @@ const SettingsSpacing = ({ themeData, updateThemeJson }) => {
                     label: __('Allow users to set custom block gap', 'theme-designer'),
                     value: spacing.blockGap,
                     onChange: (value) => updateThemeJson('settings.spacing.blockGap', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.spacing.blockGap')
+                    defaultValue: getWordPressDefault('settings.spacing.blockGap')
                 }),
                 wp.element.createElement(TriStateCheckboxControl, {
                     label: __('Allow users to set custom spacing sizes', 'theme-designer'),
                     value: spacing.customSpacingSize,
                     onChange: (value) => updateThemeJson('settings.spacing.customSpacingSize', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.spacing.customSpacingSize')
+                    defaultValue: getWordPressDefault('settings.spacing.customSpacingSize')
                 }),
                 wp.element.createElement(TriStateCheckboxControl, {
                     label: __('Allow users to set custom margins', 'theme-designer'),
                     value: spacing.margin,
                     onChange: (value) => updateThemeJson('settings.spacing.margin', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.spacing.margin')
+                    defaultValue: getWordPressDefault('settings.spacing.margin')
                 }),
                 wp.element.createElement(TriStateCheckboxControl, {
                     label: __('Allow users to set custom paddings', 'theme-designer'),
                     value: spacing.padding,
                     onChange: (value) => updateThemeJson('settings.spacing.padding', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.spacing.padding')
+                    defaultValue: getWordPressDefault('settings.spacing.padding')
                 })
             )
         ),
@@ -336,4 +338,4 @@ const SettingsSpacing = ({ themeData, updateThemeJson }) => {
             )
         ),
     );
-}; 
+}); 

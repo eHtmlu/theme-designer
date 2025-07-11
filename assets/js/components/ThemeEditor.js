@@ -1,8 +1,23 @@
 // ThemeEditor Component
-const ThemeEditor = ({ themeData, updateThemeData, updateThemeJson, isNew = false }) => {
+lodash.set(window, 'ThemDesi.Components.ThemeEditor', ({ themeData, updateThemeData, updateThemeJson, isNew = false }) => {
     const { __ } = wp.i18n;
     const { useState, useEffect, useRef } = wp.element;
     const { Button, Panel, PanelBody, Spinner } = wp.components;
+    const {
+        ThemeMetaData,
+        SettingsGeneral,
+        SettingsLayout,
+        SettingsColor,
+        SettingsBackground,
+        SettingsBorder,
+        SettingsPosition,
+        SettingsSpacing,
+        SettingsTypography,
+        SettingsShadow,
+        SettingsDimensions,
+    } = ThemDesi.Components.ThemeEditorContent;
+    const { getSvgIcon } = ThemDesi.Utils;
+    const { checkSlug } = ThemDesi.API;
 
     const [currentSection, setCurrentSection] = useState('theme-meta-data');
     const [slugStatus, setSlugStatus] = useState({ available: true, checking: false });
@@ -63,7 +78,7 @@ const ThemeEditor = ({ themeData, updateThemeData, updateThemeJson, isNew = fals
         setSlugStatus({ available: true, checking: true });
         
         try {
-            const result = await ThemeDesignerAPI.checkSlug(slug, themeData?._original_slug || '', abortControllerRef.current.signal);
+            const result = await checkSlug(slug, themeData?._original_slug || '', abortControllerRef.current.signal);
             
             // Only update status if this request wasn't aborted
             if (!abortControllerRef.current.signal.aborted) {
@@ -158,7 +173,7 @@ const ThemeEditor = ({ themeData, updateThemeData, updateThemeJson, isNew = fals
                             className: `theme-designer--sidebar__nav-item ${currentSection === section.id ? 'theme-designer--sidebar__nav-item--active' : ''}`,
                             onClick: () => setCurrentSection(section.id)
                         },
-                            ThemeDesignerUtils.getSvgIcon(section.icon),
+                            getSvgIcon(section.icon),
                             wp.element.createElement('span', { className: 'theme-designer--sidebar__nav-title' }, section.title)
                         )
                     )
@@ -171,4 +186,4 @@ const ThemeEditor = ({ themeData, updateThemeData, updateThemeJson, isNew = fals
             )
         )
     );
-}; 
+}); 

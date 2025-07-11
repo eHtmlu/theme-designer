@@ -1,7 +1,9 @@
 // ThemeList Component
-const ThemeList = ({ themes, onEdit, onDuplicate, onDelete, onExport, onCreateNew }) => {
+lodash.set(window, 'ThemDesi.Components.ThemeList', ({ themes, onEdit, onDuplicate, onDelete, onExport, onCreateNew }) => {
     const { __ } = wp.i18n;
     const { Button, DropdownMenu, MenuItem, Icon } = wp.components;
+    const { showAlert, getSvgIcon } = ThemDesi.Utils;
+    const { exportTheme } = ThemDesi.API;
 
     const handleDelete = async (theme) => {
         if (!confirm(__('Are you sure you want to permanently delete this theme?', 'theme-designer'))) {
@@ -13,9 +15,9 @@ const ThemeList = ({ themes, onEdit, onDuplicate, onDelete, onExport, onCreateNe
 
     const handleExport = async (theme) => {
         try {
-            await ThemeDesignerAPI.exportTheme(theme.slug);
+            await exportTheme(theme.slug);
         } catch (error) {
-            ThemeDesignerUtils.showAlert(error.message, 'error');
+            showAlert(error.message, 'error');
         }
     };
 
@@ -47,7 +49,7 @@ const ThemeList = ({ themes, onEdit, onDuplicate, onDelete, onExport, onCreateNe
                                             height: 60
                                         })
                                         : wp.element.createElement('div', { className: 'theme-designer--table__no-screenshot' },
-                                            ThemeDesignerUtils.getSvgIcon('image')
+                                            getSvgIcon('image')
                                         )
                                 ),
                                 wp.element.createElement('td', { className: 'theme-designer--table__name-cell' },
@@ -60,7 +62,7 @@ const ThemeList = ({ themes, onEdit, onDuplicate, onDelete, onExport, onCreateNe
                                     theme.version
                                 ),
                                 wp.element.createElement('td', { className: 'theme-designer--table__status-cell' },
-                                    theme.slug === themeDesignerData.currentTheme 
+                                    theme.slug === ThemDesiData.currentTheme 
                                         ? wp.element.createElement('span', { className: 'theme-designer--badge theme-designer--badge--active' }, __('Active', 'theme-designer'))
                                         : wp.element.createElement('span', { className: 'theme-designer--badge theme-designer--badge--inactive' }, __('Inactive', 'theme-designer'))
                                 ),
@@ -70,33 +72,33 @@ const ThemeList = ({ themes, onEdit, onDuplicate, onDelete, onExport, onCreateNe
                                             isTertiary: true,
                                             onClick: () => onEdit(theme.slug),
                                             label: __('Edit', 'theme-designer'),
-                                            icon: ThemeDesignerUtils.getSvgIcon('pencil', { size: 24 })
+                                            icon: getSvgIcon('pencil', { size: 24 })
                                         }),
                                         wp.element.createElement(DropdownMenu, {
-                                            icon: ThemeDesignerUtils.getSvgIcon('dots_horizontal', { size: 24 }),
+                                            icon: getSvgIcon('dots_horizontal', { size: 24 }),
                                             label: __('More options', 'theme-designer'),
                                             children: ({ onClose }) => [
                                                 wp.element.createElement(MenuItem, {
                                                     key: 'duplicate',
                                                     onClick: () => { onDuplicate(theme.slug); onClose(); }
                                                 },
-                                                    ThemeDesignerUtils.getSvgIcon('content_copy', { size: 24 }),
+                                                    getSvgIcon('content_copy', { size: 24 }),
                                                     __('Duplicate', 'theme-designer')
                                                 ),
                                                 wp.element.createElement(MenuItem, {
                                                     key: 'export',
                                                     onClick: () => { handleExport(theme); onClose(); },
-                                                    disabled: !themeDesignerData.exportSupported
+                                                    disabled: !ThemDesiData.exportSupported
                                                 },
-                                                    ThemeDesignerUtils.getSvgIcon('download', { size: 24 }),
+                                                    getSvgIcon('download', { size: 24 }),
                                                     __('Download Installable', 'theme-designer')
                                                 ),
-                                                theme.slug !== themeDesignerData.currentTheme && wp.element.createElement(MenuItem, {
+                                                theme.slug !== ThemDesiData.currentTheme && wp.element.createElement(MenuItem, {
                                                     key: 'delete',
                                                     isDestructive: true,
                                                     onClick: () => { handleDelete(theme); onClose(); }
                                                 },
-                                                    ThemeDesignerUtils.getSvgIcon('delete_forever', { size: 24 }),
+                                                    getSvgIcon('delete_forever', { size: 24 }),
                                                     __('Delete permanently', 'theme-designer')
                                                 )
                                             ].filter(Boolean)
@@ -109,4 +111,4 @@ const ThemeList = ({ themes, onEdit, onDuplicate, onDelete, onExport, onCreateNe
                 )
             )
     );
-}; 
+}); 

@@ -1,8 +1,9 @@
 // ListManager Component - Generic list management for theme settings
-const ListManager = ({ items, onItemsChange, renderItem, addButtonText, createNewItem, className }) => {
+lodash.set(window, 'ThemDesi.Components.ListManager', ({ items, onItemsChange, renderItem, addButtonText, createNewItem, className }) => {
     const { __ } = wp.i18n;
     const { useState, useRef } = wp.element;
     const { Button } = wp.components;
+    const { getSvgIcon } = ThemDesi.Utils;
 
     const [draggedIndex, setDraggedIndex] = useState(null);
     const [dropIndex, setDropIndex] = useState(null);
@@ -146,7 +147,7 @@ const ListManager = ({ items, onItemsChange, renderItem, addButtonText, createNe
     const createDragHandle = (className) => wp.element.createElement('div', {
         className: className || ''
     },
-        ThemeDesignerUtils.getSvgIcon('dots_grid', { size: 24 })
+        getSvgIcon('dots_grid', { size: 24 })
     );
 
     // Create placeholder element with same height as dragged item
@@ -228,4 +229,4 @@ const ListManager = ({ items, onItemsChange, renderItem, addButtonText, createNe
             className: 'theme-designer--list-manager__add-button'
         }, addButtonText)
     );
-};
+});

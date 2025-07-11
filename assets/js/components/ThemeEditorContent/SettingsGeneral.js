@@ -1,10 +1,12 @@
 // SettingsGeneral Component
-const SettingsGeneral = ({ themeData, updateThemeJson }) => {
+lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.SettingsGeneral', ({ themeData, updateThemeJson }) => {
     const { __ } = wp.i18n;
+    const { TriStateCheckboxControl } = ThemDesi.Components;
+    const { generateSlug, getSvgIcon, getWordPressDefault } = ThemDesi.Utils;
 
     return wp.element.createElement('div', { className: 'theme-designer--settings-general' },
         wp.element.createElement('h2', null,
-            ThemeDesignerUtils.getSvgIcon('cog'),
+            getSvgIcon('cog'),
             __('General', 'theme-designer')
         ),
         
@@ -17,7 +19,7 @@ const SettingsGeneral = ({ themeData, updateThemeJson }) => {
                     help: __('Enables UI tools for background, border, color, dimensions, position, spacing, and typography controls.', 'theme-designer'),
                     value: themeData.theme_json.settings?.appearanceTools,
                     onChange: (value) => updateThemeJson('settings.appearanceTools', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.appearanceTools')
+                    defaultValue: getWordPressDefault('settings.appearanceTools')
                 }),
             )
         ),
@@ -30,9 +32,9 @@ const SettingsGeneral = ({ themeData, updateThemeJson }) => {
                     help: __('Enables root padding (the values from `styles.spacing.padding`) to be applied to the contents of full-width blocks instead of the root block.\n\nPlease note that when using this setting, `styles.spacing.padding` should always be set as an object with `top`, `right`, `bottom`, `left` values declared separately.', 'theme-designer'),
                     value: themeData.theme_json.settings?.useRootPaddingAwareAlignments,
                     onChange: (value) => updateThemeJson('settings.useRootPaddingAwareAlignments', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.useRootPaddingAwareAlignments')
+                    defaultValue: getWordPressDefault('settings.useRootPaddingAwareAlignments')
                 })
             )
         )
     );
-}; 
+}); 

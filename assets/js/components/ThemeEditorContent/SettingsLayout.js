@@ -1,7 +1,9 @@
 // SettingsLayout Component
-const SettingsLayout = ({ themeData, updateThemeJson }) => {
+lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.SettingsLayout', ({ themeData, updateThemeJson }) => {
     const { __ } = wp.i18n;
     const { TextControl, Notice } = wp.components;
+    const { TriStateCheckboxControl } = ThemDesi.Components;
+    const { generateSlug, getSvgIcon, getWordPressDefault } = ThemDesi.Utils;
 
     // Check if layout size fields are empty
     const isContentSizeEmpty = !themeData.theme_json.settings?.layout?.contentSize;
@@ -11,7 +13,7 @@ const SettingsLayout = ({ themeData, updateThemeJson }) => {
 
     return wp.element.createElement('div', { className: 'theme-designer--settings-layout' },
         wp.element.createElement('h2', null,
-            ThemeDesignerUtils.getSvgIcon('mirror_rectangle'),
+            getSvgIcon('mirror_rectangle'),
             __('Layout', 'theme-designer')
         ),
         
@@ -23,13 +25,13 @@ const SettingsLayout = ({ themeData, updateThemeJson }) => {
                     label: __('Allow users to edit layout settings', 'theme-designer'),
                     value: themeData.theme_json.settings?.layout?.allowEditing,
                     onChange: (value) => updateThemeJson('settings.layout.allowEditing', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.layout.allowEditing'),
+                    defaultValue: getWordPressDefault('settings.layout.allowEditing'),
                 }),
                 themeData.theme_json.settings?.layout?.allowEditing !== false && wp.element.createElement(TriStateCheckboxControl, {
                     label: __('Allow users to set custom content size and wide size', 'theme-designer'),
                     value: themeData.theme_json.settings?.layout?.allowCustomContentAndWideSize,
                     onChange: (value) => updateThemeJson('settings.layout.allowCustomContentAndWideSize', value),
-                    defaultValue: ThemeDesignerUtils.getWordPressDefault('settings.layout.allowCustomContentAndWideSize'),
+                    defaultValue: getWordPressDefault('settings.layout.allowCustomContentAndWideSize'),
                 }),
             )
         ),
@@ -83,4 +85,4 @@ const SettingsLayout = ({ themeData, updateThemeJson }) => {
             )
         )
     );
-}; 
+}); 

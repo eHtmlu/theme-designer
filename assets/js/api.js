@@ -1,12 +1,12 @@
 // API functions for Theme Designer
-const ThemeDesignerAPI = {
+lodash.set(window, 'ThemDesi.API', {
     // Get all themes
     getThemes: async () => {
         try {
-            const response = await fetch(themeDesignerData.restUrl + 'themes', {
+            const response = await fetch(ThemDesiData.restUrl + 'themes', {
                 method: 'GET',
                 headers: {
-                    'X-WP-Nonce': themeDesignerData.nonce
+                    'X-WP-Nonce': ThemDesiData.nonce
                 }
             });
             
@@ -24,10 +24,10 @@ const ThemeDesignerAPI = {
     // Get single theme
     getTheme: async (slug) => {
         try {
-            const response = await fetch(themeDesignerData.restUrl + 'themes/' + slug, {
+            const response = await fetch(ThemDesiData.restUrl + 'themes/' + slug, {
                 method: 'GET',
                 headers: {
-                    'X-WP-Nonce': themeDesignerData.nonce
+                    'X-WP-Nonce': ThemDesiData.nonce
                 }
             });
             
@@ -45,11 +45,11 @@ const ThemeDesignerAPI = {
     // Save theme
     saveTheme: async (themeData) => {
         try {
-            const response = await fetch(themeDesignerData.restUrl + 'themes', {
+            const response = await fetch(ThemDesiData.restUrl + 'themes', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-WP-Nonce': themeDesignerData.nonce
+                    'X-WP-Nonce': ThemDesiData.nonce
                 },
                 body: JSON.stringify(themeData)
             });
@@ -69,10 +69,10 @@ const ThemeDesignerAPI = {
     // Delete theme
     deleteTheme: async (slug) => {
         try {
-            const response = await fetch(themeDesignerData.restUrl + 'themes/' + slug, {
+            const response = await fetch(ThemDesiData.restUrl + 'themes/' + slug, {
                 method: 'DELETE',
                 headers: {
-                    'X-WP-Nonce': themeDesignerData.nonce
+                    'X-WP-Nonce': ThemDesiData.nonce
                 }
             });
             
@@ -91,10 +91,10 @@ const ThemeDesignerAPI = {
     // Export theme
     exportTheme: async (slug) => {
         try {
-            const response = await fetch(themeDesignerData.restUrl + 'themes/' + slug + '/export', {
+            const response = await fetch(ThemDesiData.restUrl + 'themes/' + slug + '/export', {
                 method: 'GET',
                 headers: {
-                    'X-WP-Nonce': themeDesignerData.nonce
+                    'X-WP-Nonce': ThemDesiData.nonce
                 }
             });
             
@@ -127,7 +127,7 @@ const ThemeDesignerAPI = {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-WP-Nonce': themeDesignerData.nonce
+                    'X-WP-Nonce': ThemDesiData.nonce
                 },
                 body: JSON.stringify({
                     slug: slug,
@@ -140,7 +140,7 @@ const ThemeDesignerAPI = {
                 fetchOptions.signal = signal;
             }
 
-            const response = await fetch(themeDesignerData.restUrl + 'check-slug', fetchOptions);
+            const response = await fetch(ThemDesiData.restUrl + 'check-slug', fetchOptions);
             
             if (!response.ok) {
                 throw new Error('Failed to check slug');
@@ -155,4 +155,4 @@ const ThemeDesignerAPI = {
             throw error;
         }
     }
-}; 
+}); 
