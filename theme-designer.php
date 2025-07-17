@@ -5,7 +5,7 @@
  * Description: Create and manage block themes (theme.json) with an intuitive interface.
  * Version: 1.0.0
  * Requires at least: 6.3
- * Requires PHP: 7.4
+ * Requires PHP: 8.1
  * Author: eHtmlu
  * Author URI: https://ehtmlu.com/
  * License: GPL v2 or later
