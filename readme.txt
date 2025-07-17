@@ -114,12 +114,10 @@ Yes! The plugin includes an export feature that creates a standard WordPress the
 
 == Screenshots ==
 
-1. Theme Designer main interface showing theme list
-2. Theme creation form with metadata fields
-3. Settings configuration panel with color palette editor
-4. Typography settings with font size management
-5. Spacing configuration with custom spacing scales
-6. Theme export and management options
+1. How to open Theme Designer
+2. Theme Designer main interface showing theme list
+3. Theme creation form with metadata fields
+4. Settings configuration panel with color palette editor
 
 == Changelog ==
 
