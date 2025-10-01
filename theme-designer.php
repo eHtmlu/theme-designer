@@ -758,7 +758,7 @@ class ThemeDesigner {
         }
         
         $zip_path = wp_tempnam('theme-export-' . $theme_slug);
-        $zip = new ZipArchive();
+        $zip = new \ZipArchive();
         $zip_result = $zip->open($zip_path, \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
         
         if ($zip_result !== true) {
@@ -796,7 +796,7 @@ class ThemeDesigner {
         }
 
         // Filename
-        $filename = $sanitized_slug . '.zip';
+        $filename = $theme_slug . '.zip';
         
         // Send file to browser
         header('Content-Type: application/zip');
