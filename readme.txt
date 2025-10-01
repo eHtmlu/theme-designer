@@ -124,29 +124,3 @@ Yes! The plugin includes an export feature that creates a standard WordPress the
 = 1.0.0 =
 * Initial release
 
-== Upgrade Notice ==
-
-= 1.0.0 =
-Initial release of Theme Designer. Create your first block theme today!
-
-== Credits ==
-
-Developed by [eHtmlu](https://ehtmlu.com/)
-
-Built with WordPress best practices and modern web standards.
-
-== Support ==
-
-For support, feature requests, or bug reports, please visit:
-* [WordPress.org Plugin Page](https://wordpress.org/plugins/theme-designer/)
-* [GitHub Repository](https://github.com/eHtmlu/theme-designer)
-
-== License ==
-
-This plugin is licensed under the GPL v2 or later.
-
-== Donate ==
-
-If you find this plugin helpful, please consider making a donation to support continued development:
-
-[Donate via PayPal](https://www.paypal.com/donate/?hosted_button_id=2G6L8NWVXZ4T4)
