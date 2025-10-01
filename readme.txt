@@ -2,10 +2,10 @@
 Contributors: eHtmlu
 Donate link: https://www.paypal.com/donate/?hosted_button_id=2G6L8NWVXZ4T4
 Tags: block-theme, colors, typography, spacing, theme-builder
-Requires at least: 6.3
+Requires at least: 5.8
 Tested up to: 6.8
 Stable tag: 1.0.0
-Requires PHP: 8.1
+Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
