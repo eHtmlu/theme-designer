@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/donate/?hosted_button_id=2G6L8NWVXZ4T4
 Tags: block-theme, colors, typography, spacing, theme-builder
 Requires at least: 5.8
 Tested up to: 6.8
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -126,6 +126,12 @@ Yes! The plugin includes an export feature that creates a standard WordPress the
 
 == Changelog ==
 
-= 1.0.0 =
+= 1.1.0 - 2025-10-01 =
+* Compatibility extended down to PHP 7.0 and down to WordPress 5.8
+* Fixed two critical theme download issues
+* Optimized the initial content of the index.html template
+* Prevented existing template files from being overwritten
+
+= 1.0.0 - 2025-07-17 =
 * Initial release
 

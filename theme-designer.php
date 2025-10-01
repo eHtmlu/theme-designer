@@ -3,7 +3,7 @@
  * Plugin Name: Theme Designer
  * Plugin URI: https://wordpress.org/plugins/theme-designer/
  * Description: Create and manage block themes (theme.json) with an intuitive interface.
- * Version: 1.0.0
+ * Version: 1.1.0
  * Requires at least: 5.8
  * Requires PHP: 7.0
  * Author: eHtmlu
