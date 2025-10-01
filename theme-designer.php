@@ -412,13 +412,17 @@ class ThemeDesigner {
         }
         
         // Transform theme.json data into our format
-        $parsed_data = [
-            '_original_slug' => $theme_slug,
-            ...$theme_data,
-            'slug' => $theme_slug,
-            'screenshot' => '',
-            'theme_json' => $json_data,
-        ];
+        $parsed_data = array_merge(
+            [
+                '_original_slug' => $theme_slug
+            ],
+            $theme_data,
+            [
+                'slug' => $theme_slug,
+                'screenshot' => '',
+                'theme_json' => $json_data,
+            ]
+        );
         
         // Check for screenshot
         if ($screenshot_filename = $this->get_screenshot_filename($theme_slug)) {
