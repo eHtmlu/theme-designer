@@ -518,22 +518,31 @@ class ThemeDesigner {
             return new \WP_Error('theme_json_save_failed', __('Failed to save theme.json.', 'theme-designer'));
         }
         
-        // Save index.html
-        $index_content = $this->generate_index_html($theme_data);
-        if (!$this->wp_filesystem()->put_contents($templates_path . '/index.html', $index_content)) {
-            return new \WP_Error('index_save_failed', __('Failed to save index.html.', 'theme-designer'));
+        // Save index.html (only if it doesn't exist)
+        $index_file_path = $templates_path . '/index.html';
+        if (!$this->wp_filesystem()->exists($index_file_path)) {
+            $index_content = $this->generate_index_html($theme_data);
+            if (!$this->wp_filesystem()->put_contents($index_file_path, $index_content)) {
+                return new \WP_Error('index_save_failed', __('Failed to save index.html.', 'theme-designer'));
+            }
         }
         
-        // Save header template part
-        $header_content = $this->generate_header_part($theme_data);
-        if (!$this->wp_filesystem()->put_contents($parts_path . '/header.html', $header_content)) {
-            return new \WP_Error('header_save_failed', __('Failed to save header.html.', 'theme-designer'));
+        // Save header template part (only if it doesn't exist)
+        $header_file_path = $parts_path . '/header.html';
+        if (!$this->wp_filesystem()->exists($header_file_path)) {
+            $header_content = $this->generate_header_part($theme_data);
+            if (!$this->wp_filesystem()->put_contents($header_file_path, $header_content)) {
+                return new \WP_Error('header_save_failed', __('Failed to save header.html.', 'theme-designer'));
+            }
         }
         
-        // Save footer template part
-        $footer_content = $this->generate_footer_part($theme_data);
-        if (!$this->wp_filesystem()->put_contents($parts_path . '/footer.html', $footer_content)) {
-            return new \WP_Error('footer_save_failed', __('Failed to save footer.html.', 'theme-designer'));
+        // Save footer template part (only if it doesn't exist)
+        $footer_file_path = $parts_path . '/footer.html';
+        if (!$this->wp_filesystem()->exists($footer_file_path)) {
+            $footer_content = $this->generate_footer_part($theme_data);
+            if (!$this->wp_filesystem()->put_contents($footer_file_path, $footer_content)) {
+                return new \WP_Error('footer_save_failed', __('Failed to save footer.html.', 'theme-designer'));
+            }
         }
         
         // Save screenshot if provided
