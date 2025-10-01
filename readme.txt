@@ -67,6 +67,11 @@ Themes created with Theme Designer work seamlessly with the WordPress Site Edito
 
 **Note**: Settings defined in the Site Editor take precedence over theme settings, even after saving new values in the theme.
 
+== More from the same author ===
+
+Take a look at [www.wppeak.com](https://www.wppeak.com/)
+
+
 = Requirements =
 
 * Block theme support enabled
