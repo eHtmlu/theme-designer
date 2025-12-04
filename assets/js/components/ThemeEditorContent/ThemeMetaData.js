@@ -295,7 +295,7 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.ThemeMetaData', ({ th
                 // License
                 wp.element.createElement(TextControl, {
                     label: __('License', 'theme-designer'),
-                    help: sprintf(__('The license of your theme. The most common license for WordPress themes is "%s".', 'theme-designer'), 'GNU General Public License v2 or later'),
+                    help: wp.i18n.sprintf(__('The license of your theme. The most common license for WordPress themes is "%s".', 'theme-designer'), 'GNU General Public License v2 or later'),
                     value: localData.license || '',
                     onChange: (value) => handleChange('license', value),
                     className: 'regular-text',
@@ -305,7 +305,7 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.ThemeMetaData', ({ th
                 // License URI
                 wp.element.createElement(TextControl, {
                     label: __('License URI', 'theme-designer'),
-                    help: sprintf(__('The URI of the license of your theme. The URI of the most common license for WordPress themes is "%s".', 'theme-designer'), 'http://www.gnu.org/licenses/gpl-2.0.html'   ),
+                    help: wp.i18n.sprintf(__('The URI of the license of your theme. The URI of the most common license for WordPress themes is "%s".', 'theme-designer'), 'http://www.gnu.org/licenses/gpl-2.0.html'   ),
                     value: localData.license_uri || '',
                     onChange: (value) => handleChange('license_uri', value),
                     className: 'regular-text',

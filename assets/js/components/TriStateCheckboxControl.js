@@ -93,9 +93,9 @@ lodash.set(window, 'ThemDesi.Components.TriStateCheckboxControl', ({ label, valu
             ...states['undefined'],
             ...(states[defaultValue] ? {
                 icon: states[defaultValue].icon,
-                label: sprintf(states['undefined'].label, typeof defaultValue === 'boolean' ? states[defaultValue].label : 'unknown')
+                label: wp.i18n.sprintf(states['undefined'].label, typeof defaultValue === 'boolean' ? states[defaultValue].label : 'unknown')
             } : {
-                label: sprintf(states['undefined'].label, JSON.stringify(defaultValue))
+                label: wp.i18n.sprintf(states['undefined'].label, JSON.stringify(defaultValue))
             }),
         } : states[state];
     };
