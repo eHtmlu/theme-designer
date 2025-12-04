@@ -2,7 +2,7 @@
 Contributors: eHtmlu
 Donate link: https://www.paypal.com/donate/?hosted_button_id=2G6L8NWVXZ4T4
 Tags: block-theme, colors, typography, spacing, theme-builder
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 Tested up to: 6.9
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -122,6 +122,9 @@ Yes! The plugin includes an export feature that creates a standard WordPress the
 4. Settings configuration panel with color palette editor
 
 == Changelog ==
+
+= 1.1.1 - 2025-12-04 =
+* Fixed compatibility issue with WordPress 6.9
 
 = 1.1.0 - 2025-10-01 =
 * Compatibility extended down to PHP 7.0 and down to WordPress 5.8
