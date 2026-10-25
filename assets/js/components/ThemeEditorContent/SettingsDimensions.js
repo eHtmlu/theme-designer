@@ -31,20 +31,23 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.SettingsDimensions', 
                 label: __('Name', 'theme-designer'),
                 value: aspectRatio.name,
                 onChange: (value) => updateAspectRatio('name', value),
-                __next40pxDefaultSize: true
+                __next40pxDefaultSize: true,
+                __nextHasNoMarginBottom: true
             }),
             wp.element.createElement(TextControl, {
                 label: __('Slug', 'theme-designer'),
                 value: aspectRatio.slug,
                 onChange: (value) => updateAspectRatio('slug', value),
-                __next40pxDefaultSize: true
+                __next40pxDefaultSize: true,
+                __nextHasNoMarginBottom: true
             }),
             wp.element.createElement(TextControl, {
                 label: __('Ratio', 'theme-designer'),
                 placeholder: __('e.g. 16/9, 4/3, 1.5', 'theme-designer'),
                 value: aspectRatio.ratio,
                 onChange: (value) => updateAspectRatio('ratio', value),
-                __next40pxDefaultSize: true
+                __next40pxDefaultSize: true,
+                __nextHasNoMarginBottom: true
             })
         ];
     };

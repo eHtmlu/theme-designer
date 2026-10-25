@@ -71,7 +71,8 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.SettingsLayout', ({ t
                     value: themeData.theme_json.settings?.layout?.contentSize,
                     onChange: (value) => updateThemeJson('settings.layout.contentSize', value),
                     className: 'regular-text',
-                    __next40pxDefaultSize: true
+                    __next40pxDefaultSize: true,
+                    __nextHasNoMarginBottom: true
                 }),
 
                 wp.element.createElement(TextControl, {
@@ -80,7 +81,8 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.SettingsLayout', ({ t
                     value: themeData.theme_json.settings?.layout?.wideSize,
                     onChange: (value) => updateThemeJson('settings.layout.wideSize', value),
                     className: 'regular-text',
-                    __next40pxDefaultSize: true
+                    __next40pxDefaultSize: true,
+                    __nextHasNoMarginBottom: true
                 })
             )
         )

@@ -40,7 +40,8 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.SettingsColor', ({ th
                 value: color.name,
                 onChange: (value) => updateColor('name', value),
                 className: 'color-name',
-                __next40pxDefaultSize: true
+                __next40pxDefaultSize: true,
+                __nextHasNoMarginBottom: true
             }),
             wp.element.createElement(TextControl, {
                 label: __('Slug', 'theme-designer'),
@@ -48,7 +49,8 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.SettingsColor', ({ th
                 value: color.slug,
                 onChange: (value) => updateColor('slug', value),
                 className: 'color-slug',
-                __next40pxDefaultSize: true
+                __next40pxDefaultSize: true,
+                __nextHasNoMarginBottom: true
             }),
             // Swatch + Popover
             wp.element.createElement('div', { className: 'theme-designer--color-swatch-container' },
@@ -93,14 +95,16 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.SettingsColor', ({ th
                 value: gradient.name,
                 onChange: (value) => updateGradient('name', value),
                 className: 'gradient-name',
-                __next40pxDefaultSize: true
+                __next40pxDefaultSize: true,
+                __nextHasNoMarginBottom: true
             }),
             wp.element.createElement(TextControl, {
                 label: __('Slug', 'theme-designer'),
                 value: gradient.slug,
                 onChange: (value) => updateGradient('slug', value),
                 className: 'gradient-slug',
-                __next40pxDefaultSize: true
+                __next40pxDefaultSize: true,
+                __nextHasNoMarginBottom: true
             }),
             wp.element.createElement(TextControl, {
                 label: __('CSS Value', 'theme-designer'),
@@ -108,7 +112,8 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.SettingsColor', ({ th
                 value: gradient.gradient,
                 onChange: (value) => updateGradient('gradient', value),
                 className: 'gradient-value',
-                __next40pxDefaultSize: true
+                __next40pxDefaultSize: true,
+                __nextHasNoMarginBottom: true
             })
         ];
     };

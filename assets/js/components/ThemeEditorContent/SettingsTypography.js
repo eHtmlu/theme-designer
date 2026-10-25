@@ -128,14 +128,16 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.SettingsTypography', 
                     value: fontSize.name,
                     onChange: (value) => updateFontSize('name', value),
                     className: 'font-size-name',
-                    __next40pxDefaultSize: true
+                    __next40pxDefaultSize: true,
+                    __nextHasNoMarginBottom: true
                 }),
                 wp.element.createElement(TextControl, {
                     label: __('Slug', 'theme-designer'),
                     value: fontSize.slug,
                     onChange: (value) => updateFontSize('slug', value),
                     className: 'font-size-slug',
-                    __next40pxDefaultSize: true
+                    __next40pxDefaultSize: true,
+                    __nextHasNoMarginBottom: true
                 }),
                 wp.element.createElement(TextControl, {
                     label: __('Size', 'theme-designer'),
@@ -143,16 +145,19 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.SettingsTypography', 
                     value: fontSize.size,
                     onChange: (value) => updateFontSize('size', value),
                     className: 'font-size-size',
-                    __next40pxDefaultSize: true
+                    __next40pxDefaultSize: true,
+                    __nextHasNoMarginBottom: true
                 }),
                 isGlobalFluidEnabled && wp.element.createElement(BaseControl, {
                     label: __('Fluid', 'theme-designer'),
-                    className: 'fluid-toggle'
+                    className: 'fluid-toggle',
+                    __nextHasNoMarginBottom: true
                 },
                     isGlobalFluidEnabled && wp.element.createElement(ToggleControl, {
                         //label: __('Fluid', 'theme-designer'),
                         checked: isFluidEnabled,
-                        onChange: (value) => updateFluidSettings('enabled', value)
+                        onChange: (value) => updateFluidSettings('enabled', value),
+                        __nextHasNoMarginBottom: true
                     }),
                 ),
             ),
@@ -164,14 +169,16 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.SettingsTypography', 
                     placeholder: __('e.g. 0.875rem', 'theme-designer'),
                     value: fontSize.fluid.min || '',
                     onChange: (value) => updateFluidSettings('min', value),
-                    __next40pxDefaultSize: true
+                    __next40pxDefaultSize: true,
+                    __nextHasNoMarginBottom: true
                 }),
                 wp.element.createElement(TextControl, {
                     label: __('Max Size', 'theme-designer'),
                     placeholder: __('e.g. 1.125rem', 'theme-designer'),
                     value: fontSize.fluid.max || '',
                     onChange: (value) => updateFluidSettings('max', value),
-                    __next40pxDefaultSize: true
+                    __next40pxDefaultSize: true,
+                    __nextHasNoMarginBottom: true
                 })
             )
         ];
@@ -196,14 +203,16 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.SettingsTypography', 
                 value: fontFamily.name,
                 onChange: (value) => updateFontFamily('name', value),
                 className: 'font-family-name',
-                __next40pxDefaultSize: true
+                __next40pxDefaultSize: true,
+                __nextHasNoMarginBottom: true
             }),
             wp.element.createElement(TextControl, {
                 label: __('Slug', 'theme-designer'),
                 value: fontFamily.slug,
                 onChange: (value) => updateFontFamily('slug', value),
                 className: 'font-family-slug',
-                __next40pxDefaultSize: true
+                __next40pxDefaultSize: true,
+                __nextHasNoMarginBottom: true
             }),
             wp.element.createElement(TextControl, {
                 label: __('CSS Value', 'theme-designer'),
@@ -211,7 +220,8 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.SettingsTypography', 
                 value: fontFamily.fontFamily,
                 onChange: (value) => updateFontFamily('fontFamily', value),
                 className: 'font-family-value',
-                __next40pxDefaultSize: true
+                __next40pxDefaultSize: true,
+                __nextHasNoMarginBottom: true
             })
         ];
     };
@@ -273,15 +283,13 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.SettingsTypography', 
                     label: __('Allow users to set text alignment', 'theme-designer'),
                     value: themeData.theme_json.settings?.typography?.textAlign,
                     onChange: (value) => updateThemeJson('settings.typography.textAlign', value),
-                    defaultValue: getWordPressDefault('settings.typography.textAlign'),
-                    help: __('No core block takes this setting into account yet, so this setting may have no effect.', 'theme-designer')
+                    defaultValue: getWordPressDefault('settings.typography.textAlign')
                 }),
                 wp.element.createElement(TriStateCheckboxControl, {
                     label: __('Allow users to set text columns', 'theme-designer'),
                     value: themeData.theme_json.settings?.typography?.textColumns,
                     onChange: (value) => updateThemeJson('settings.typography.textColumns', value),
-                    defaultValue: getWordPressDefault('settings.typography.textColumns'),
-                    help: __('No core block supports this feature yet, so this setting may have no effect.', 'theme-designer')
+                    defaultValue: getWordPressDefault('settings.typography.textColumns')
                 }),
                 wp.element.createElement(TriStateCheckboxControl, {
                     label: __('Allow users to set text decorations', 'theme-designer'),
@@ -337,7 +345,8 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.SettingsTypography', 
                                 onChange: (value) => updateFluidSetting('minFontSize', value),
                                 help: __('Global minimum font size boundary (e.g., 14px, 0.875rem)', 'theme-designer'),
                                 className: 'regular-text',
-                                __next40pxDefaultSize: true
+                                __next40pxDefaultSize: true,
+                                __nextHasNoMarginBottom: true
                             }),
                             wp.element.createElement(TextControl, {
                                 label: __('Minimum Viewport Width', 'theme-designer'),
@@ -345,7 +354,8 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.SettingsTypography', 
                                 onChange: (value) => updateFluidSetting('minViewportWidth', value),
                                 help: __('Minimum viewport width for fluid calculations (e.g., 768px, 48rem)', 'theme-designer'),
                                 className: 'regular-text',
-                                __next40pxDefaultSize: true
+                                __next40pxDefaultSize: true,
+                                __nextHasNoMarginBottom: true
                             }),
                             wp.element.createElement(TextControl, {
                                 label: __('Maximum Viewport Width', 'theme-designer'),
@@ -353,7 +363,8 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.SettingsTypography', 
                                 onChange: (value) => updateFluidSetting('maxViewportWidth', value),
                                 help: __('Maximum viewport width for fluid calculations (e.g., 1200px, 75rem)', 'theme-designer'),
                                 className: 'regular-text',
-                                __next40pxDefaultSize: true
+                                __next40pxDefaultSize: true,
+                                __nextHasNoMarginBottom: true
                             })
                         )
                     ),

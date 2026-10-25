@@ -55,7 +55,8 @@ lodash.set(window, 'ThemDesi.Components.ComboboxControl', ({ label, value, onCha
     return wp.element.createElement(BaseControl, {
         label: label,
         help: help,
-        className: className
+        className: className,
+        __nextHasNoMarginBottom: true
     },
         isCustom 
             ? wp.element.createElement(TextControl, {
@@ -65,6 +66,7 @@ lodash.set(window, 'ThemDesi.Components.ComboboxControl', ({ label, value, onCha
                 onBlur: handleTextBlur,
                 placeholder: placeholder || __('Enter custom value', 'theme-designer'),
                 __next40pxDefaultSize: true,
+                __nextHasNoMarginBottom: true,
                 ...props
             })
             : wp.element.createElement(SelectControl, {
@@ -72,6 +74,7 @@ lodash.set(window, 'ThemDesi.Components.ComboboxControl', ({ label, value, onCha
                 options: selectOptions,
                 onChange: handleSelectChange,
                 __next40pxDefaultSize: true,
+                __nextHasNoMarginBottom: true,
                 ...props
             })
     );

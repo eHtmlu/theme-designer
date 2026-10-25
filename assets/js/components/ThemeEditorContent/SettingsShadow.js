@@ -32,14 +32,16 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.SettingsShadow', ({ t
                 value: shadow.name,
                 onChange: (value) => updateShadow('name', value),
                 className: 'shadow-name',
-                __next40pxDefaultSize: true
+                __next40pxDefaultSize: true,
+                __nextHasNoMarginBottom: true
             }),
             wp.element.createElement(TextControl, {
                 label: __('Slug', 'theme-designer'),
                 value: shadow.slug,
                 onChange: (value) => updateShadow('slug', value),
                 className: 'shadow-slug',
-                __next40pxDefaultSize: true
+                __next40pxDefaultSize: true,
+                __nextHasNoMarginBottom: true
             }),
             wp.element.createElement(TextControl, {
                 label: __('CSS Value', 'theme-designer'),
@@ -47,7 +49,8 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.SettingsShadow', ({ t
                 value: shadow.shadow,
                 onChange: (value) => updateShadow('shadow', value),
                 className: 'shadow-value',
-                __next40pxDefaultSize: true
+                __next40pxDefaultSize: true,
+                __nextHasNoMarginBottom: true
             })
         ];
     };

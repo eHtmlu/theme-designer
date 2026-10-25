@@ -117,14 +117,16 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.SettingsSpacing', ({ 
                 value: spacingSize.name,
                 onChange: (value) => updateSpacingSize('name', value),
                 className: 'spacing-size-name',
-                __next40pxDefaultSize: true
+                __next40pxDefaultSize: true,
+                __nextHasNoMarginBottom: true
             }),
             wp.element.createElement(TextControl, {
                 label: __('Slug', 'theme-designer'),
                 value: spacingSize.slug,
                 onChange: (value) => updateSpacingSize('slug', value),
                 className: 'spacing-size-slug',
-                __next40pxDefaultSize: true
+                __next40pxDefaultSize: true,
+                __nextHasNoMarginBottom: true
             }),
             wp.element.createElement(TextControl, {
                 label: __('Value', 'theme-designer'),
@@ -132,7 +134,8 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.SettingsSpacing', ({ 
                 value: spacingSize.size,
                 onChange: (value) => updateSpacingSize('size', value),
                 className: 'spacing-size-size',
-                __next40pxDefaultSize: true
+                __next40pxDefaultSize: true,
+                __nextHasNoMarginBottom: true
             })
         ];
     };
@@ -230,6 +233,7 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.SettingsSpacing', ({ 
                             updateThemeJson('settings.spacing.spacingScale', '');
                         }
                     },
+                    __nextHasNoMarginBottom: true
                 }),
                 !spacing.defaultSpacingSizes && spacing.spacingScale && typeof spacing.spacingScale === 'object' && [
                     wp.element.createElement(RangeControl, {
@@ -240,7 +244,8 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.SettingsSpacing', ({ 
                         max: 10,
                         help: __('Number of steps in the spacing scale (1-10).', 'theme-designer'),
                         className: 'regular-text',
-                        __next40pxDefaultSize: true
+                        __next40pxDefaultSize: true,
+                        __nextHasNoMarginBottom: true
                     }),
 
                     wp.element.createElement(SelectControl, {
@@ -253,7 +258,8 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.SettingsSpacing', ({ 
                         onChange: (value) => updateThemeJson('settings.spacing.spacingScale.operator', value),
                         help: __('The mathematical operator for the spacing scale.', 'theme-designer'),
                         className: 'regular-text',
-                        __next40pxDefaultSize: true
+                        __next40pxDefaultSize: true,
+                        __nextHasNoMarginBottom: true
                     }),
 
                     wp.element.createElement(TextControl, {
@@ -265,7 +271,8 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.SettingsSpacing', ({ 
                         step: '0.1',
                         min: '0.1',
                         className: 'regular-text',
-                        __next40pxDefaultSize: true
+                        __next40pxDefaultSize: true,
+                        __nextHasNoMarginBottom: true
                     }),
 
                     wp.element.createElement(TextControl, {
@@ -277,7 +284,8 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.SettingsSpacing', ({ 
                         step: '0.1',
                         min: '0.1',
                         className: 'regular-text',
-                        __next40pxDefaultSize: true
+                        __next40pxDefaultSize: true,
+                        __nextHasNoMarginBottom: true
                     }),
 
                     wp.element.createElement(ComboboxControl, {

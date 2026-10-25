@@ -104,7 +104,8 @@ lodash.set(window, 'ThemDesi.Components.TriStateCheckboxControl', ({ label, valu
 
     return wp.element.createElement(BaseControl, {
         help: help,
-        className: 'theme-designer--tri-state-checkbox ' + currentState.stateClass + ' ' + className
+        className: 'theme-designer--tri-state-checkbox ' + currentState.stateClass + ' ' + className,
+        __nextHasNoMarginBottom: true
     },
         wp.element.createElement('label', {
             className: 'theme-designer--tri-state-checkbox__control',

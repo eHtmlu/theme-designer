@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     'use strict';
     
     const { __ } = wp.i18n;
-    const { useState, useEffect, render } = wp.element;
+    const { useState, useEffect, createRoot, render } = wp.element;
     const { Button } = wp.components;
     const { ThemeList, ThemeEditor, SuccessMessage } = window.ThemDesi.Components;
     const { showAlert, getDefaultConfig, deepClone } = ThemDesi.Utils;
@@ -290,6 +290,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Render the app
     const container = document.getElementById('theme-designer-app');
     if (container) {
-        render(wp.element.createElement(ThemeDesignerApp), container);
+        const app = wp.element.createElement(ThemeDesignerApp);
+        // Transitional: createRoot exists since WordPress 6.2; render() keeps the declared WordPress 5.8 support working. Drop it once the minimum is 6.2.
+        if (createRoot) {
+            createRoot(container).render(app);
+        } else {
+            render(app, container);
+        }
     }
 }); 

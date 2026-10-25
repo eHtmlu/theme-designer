@@ -760,8 +760,15 @@
     margin-bottom: 0;
 }
 
+/* The WordPress components bring no margins (__nextHasNoMarginBottom); only outermost fields get spacing, because composite
+   components nest their own (e.g. RangeControl's number input), and :where() lets component rules override it */
+:where(.theme-designer--main__section-content) .components-base-control__field:not(:where(.components-base-control__field *)) {
+    margin-bottom: 0.5rem; /* 8px */
+}
+
 .theme-designer--main__section-content .components-base-control__help {
     margin-top: 0.25rem; /* 4px */
+    margin-bottom: 0.8125rem; /* 13px */
     color: #666;
     font-style: italic;
     font-size: 0.8125rem; /* 13px */

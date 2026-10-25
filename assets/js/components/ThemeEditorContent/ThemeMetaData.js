@@ -112,7 +112,8 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.ThemeMetaData', ({ th
                     value: localData.name || '',
                     onChange: handleNameChange,
                     className: 'regular-text',
-                    __next40pxDefaultSize: true
+                    __next40pxDefaultSize: true,
+                    __nextHasNoMarginBottom: true
                 }),
 
                 // Theme Slug
@@ -128,7 +129,8 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.ThemeMetaData', ({ th
                     onChange: handleSlugChange,
                     className: 'regular-text',
                     required: true,
-                    __next40pxDefaultSize: true
+                    __next40pxDefaultSize: true,
+                    __nextHasNoMarginBottom: true
                 }),
 
                 // Text Domain
@@ -138,7 +140,8 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.ThemeMetaData', ({ th
                     value: localData.text_domain || '',
                     onChange: handleTextDomainChange,
                     className: 'regular-text',
-                    __next40pxDefaultSize: true
+                    __next40pxDefaultSize: true,
+                    __nextHasNoMarginBottom: true
                 }),
 
             )
@@ -159,6 +162,7 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.ThemeMetaData', ({ th
                         wp.element.createElement('br', null),
                         __('Maximum file size: 2MB', 'theme-designer')
                     ],
+                    __nextHasNoMarginBottom: true,
                 },
                 wp.element.createElement('div', { className: 'theme-designer--screenshot-upload' },
                     wp.element.createElement('div', { className: 'theme-designer--screenshot-preview' },
@@ -201,7 +205,8 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.ThemeMetaData', ({ th
                     value: localData.version || '',
                     onChange: (value) => handleChange('version', value),
                     className: 'regular-text',
-                    __next40pxDefaultSize: true
+                    __next40pxDefaultSize: true,
+                    __nextHasNoMarginBottom: true
                 }),
 
                 // Theme URI
@@ -211,7 +216,8 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.ThemeMetaData', ({ th
                     value: localData.theme_uri || '',
                     onChange: (value) => handleChange('theme_uri', value),
                     className: 'regular-text',
-                    __next40pxDefaultSize: true
+                    __next40pxDefaultSize: true,
+                    __nextHasNoMarginBottom: true
                 }),
 
                 // Description
@@ -222,7 +228,8 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.ThemeMetaData', ({ th
                     onChange: (value) => handleChange('description', value),
                     rows: 3,
                     className: 'large-text theme-designer--main__section-content--grid-column-span-2',
-                    __next40pxDefaultSize: true
+                    __next40pxDefaultSize: true,
+                    __nextHasNoMarginBottom: true
                 }),
                 
                 // Author
@@ -232,7 +239,8 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.ThemeMetaData', ({ th
                     value: localData.author || '',
                     onChange: (value) => handleChange('author', value),
                     className: 'regular-text',
-                    __next40pxDefaultSize: true
+                    __next40pxDefaultSize: true,
+                    __nextHasNoMarginBottom: true
                 }),
 
                 // Author URI
@@ -242,7 +250,8 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.ThemeMetaData', ({ th
                     value: localData.author_uri || '',
                     onChange: (value) => handleChange('author_uri', value),
                     className: 'regular-text',
-                    __next40pxDefaultSize: true
+                    __next40pxDefaultSize: true,
+                    __nextHasNoMarginBottom: true
                 }),
 
                 // Requires at least
@@ -252,7 +261,8 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.ThemeMetaData', ({ th
                     value: localData.requires_at_least || '',
                     onChange: (value) => handleChange('requires_at_least', value),
                     className: 'regular-text',
-                    __next40pxDefaultSize: true
+                    __next40pxDefaultSize: true,
+                    __nextHasNoMarginBottom: true
                 }),
 
                 // Tested up to
@@ -262,7 +272,8 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.ThemeMetaData', ({ th
                     value: localData.tested_up_to || '',
                     onChange: (value) => handleChange('tested_up_to', value),
                     className: 'regular-text',
-                    __next40pxDefaultSize: true
+                    __next40pxDefaultSize: true,
+                    __nextHasNoMarginBottom: true
                 }),
 
                 // Requires PHP
@@ -272,7 +283,8 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.ThemeMetaData', ({ th
                     value: localData.requires_php || '',
                     onChange: (value) => handleChange('requires_php', value),
                     className: 'regular-text',
-                    __next40pxDefaultSize: true
+                    __next40pxDefaultSize: true,
+                    __nextHasNoMarginBottom: true
                 }),
 
             )
@@ -289,7 +301,8 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.ThemeMetaData', ({ th
                     value: localData.tags || '',
                     onChange: (value) => handleChange('tags', value),
                     className: 'regular-text theme-designer--main__section-content--grid-column-span-3',
-                    __next40pxDefaultSize: true
+                    __next40pxDefaultSize: true,
+                    __nextHasNoMarginBottom: true
                 }),
 
                 // License
@@ -299,7 +312,8 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.ThemeMetaData', ({ th
                     value: localData.license || '',
                     onChange: (value) => handleChange('license', value),
                     className: 'regular-text',
-                    __next40pxDefaultSize: true
+                    __next40pxDefaultSize: true,
+                    __nextHasNoMarginBottom: true
                 }),
 
                 // License URI
@@ -309,7 +323,8 @@ lodash.set(window, 'ThemDesi.Components.ThemeEditorContent.ThemeMetaData', ({ th
                     value: localData.license_uri || '',
                     onChange: (value) => handleChange('license_uri', value),
                     className: 'regular-text',
-                    __next40pxDefaultSize: true
+                    __next40pxDefaultSize: true,
+                    __nextHasNoMarginBottom: true
                 }),
 
             )
