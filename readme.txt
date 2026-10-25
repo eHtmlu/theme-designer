@@ -2,7 +2,7 @@
 Contributors: eHtmlu
 Donate link: https://www.paypal.com/donate/?hosted_button_id=2G6L8NWVXZ4T4
 Tags: block-theme, colors, typography, spacing, theme-builder
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 Tested up to: 7.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -122,6 +122,11 @@ Yes! The plugin includes an export feature that creates a standard WordPress the
 4. Settings configuration panel with color palette editor
 
 == Changelog ==
+
+= 1.1.2 - 2026-10-25 =
+* Fixed the missing spacing between settings fields with WordPress 7.1
+* Removed the outdated help texts for text alignment and text columns, as core blocks now support these settings
+* Prepared the admin page for React 19
 
 = 1.1.1 - 2025-12-04 =
 * Fixed compatibility issue with WordPress 6.9
